@@ -1,25 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AppProvider } from '@shopify/polaris';
+import enTranslations from '@shopify/polaris/locales/en.json';
+import '@shopify/polaris/build/esm/styles.css';
+
+import Dashboard from './pages/Dashboard';
+import DiscountList from './pages/DiscountList';
+import CreateDiscount from './pages/CreateDiscount';
+import EditDiscount from './pages/EditDiscount';
+import SubscriptionList from './pages/SubscriptionList';
+import EditSubscription from './pages/EditSubscription';
+import Analytics from './pages/Analytics';
+import Settings from './pages/Settings';
+import Layout from './components/Layout';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider i18n={enTranslations}>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/discounts" element={<DiscountList />} />
+            <Route path="/discounts/new" element={<CreateDiscount />} />
+            <Route path="/discounts/:id/edit" element={<EditDiscount />} />
+            <Route path="/subscriptions" element={<SubscriptionList />} />
+            <Route path="/subscriptions/:id/edit" element={<EditSubscription />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </AppProvider>
   );
 }
 
