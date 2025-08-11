@@ -4,7 +4,7 @@ import { AppProvider } from '@shopify/polaris';
 import enTranslations from '@shopify/polaris/locales/en.json';
 import '@shopify/polaris/build/esm/styles.css';
 
-import Dashboard from './pages/Dashboard';
+import EnhancedDashboard from './pages/EnhancedDashboard';
 import DiscountList from './pages/DiscountList';
 import CreateDiscount from './pages/CreateDiscount';
 import EditDiscount from './pages/EditDiscount';
@@ -20,7 +20,7 @@ function App() {
       <Router>
         <Layout>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<EnhancedDashboard />} />
             <Route path="/discounts" element={<DiscountList />} />
             <Route path="/discounts/new" element={<CreateDiscount />} />
             <Route path="/discounts/:id/edit" element={<EditDiscount />} />
