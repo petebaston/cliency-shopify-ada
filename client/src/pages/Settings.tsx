@@ -140,7 +140,7 @@ function Settings() {
 
   const handleResetSettings = async () => {
     try {
-      await api.post('/settings/reset');
+      await api.post('/settings/reset', {});
       await fetchSettings();
       setResetModalActive(false);
       setSuccessBanner(true);
@@ -243,14 +243,18 @@ function Settings() {
       )}
 
       {errors.submit && (
-        <Banner status="critical" onDismiss={() => setErrors({ ...errors, submit: undefined })}>
+        <Banner tone="critical" onDismiss={() => setErrors({ ...errors, submit: undefined })}>
           <p>{errors.submit}</p>
         </Banner>
       )}
 
       <Layout>
         <Layout.Section>
-          <Card sectioned title="Store Information">
+          <Card>
+            <Box padding="400">
+              <Text variant="headingMd" as="h3">Store Information</Text>
+            </Box>
+            <Box padding="400">
             <FormLayout>
               <TextField
                 label="Store Name"
@@ -285,7 +289,11 @@ function Settings() {
             </FormLayout>
           </Card>
 
-          <Card sectioned title="Discount Defaults">
+          <Card>
+            <Box padding="400">
+              <Text variant="headingMd" as="h3">Discount Defaults</Text>
+            </Box>
+            <Box padding="400">
             <FormLayout>
               <Select
                 label="Default Discount Duration"
@@ -329,7 +337,11 @@ function Settings() {
             </FormLayout>
           </Card>
 
-          <Card sectioned title="Automation">
+          <Card>
+            <Box padding="400">
+              <Text variant="headingMd" as="h3">Automation</Text>
+            </Box>
+            <Box padding="400">
             <FormLayout>
               <Checkbox
                 label="Auto-deactivate expired discounts"

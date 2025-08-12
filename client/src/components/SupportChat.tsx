@@ -18,16 +18,16 @@ import {
 } from '@shopify/polaris';
 import {
   ChatIcon,
-  SendMajor,
+  SendIcon,
   CheckCircleIcon,
-  AttachmentMajor,
-  QuestionMarkMajor,
+  AttachmentIcon,
+  QuestionCircleIcon,
   ClockIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-  MinimizeMajor,
-  MaximizeMajor,
-  CancelMinor,
+  MinimizeIcon,
+  MaximizeIcon,
+  XIcon,
   CashDollarIcon,
   AlertDiamondIcon,
   LightbulbIcon,
@@ -68,7 +68,7 @@ function SupportChat({ shopDomain, userEmail, userName }: SupportChatProps) {
     { id: 'billing', label: 'Billing Question', icon: CashDollarIcon },
     { id: 'technical', label: 'Technical Issue', icon: AlertDiamondIcon },
     { id: 'feature', label: 'Feature Request', icon: LightbulbIcon },
-    { id: 'other', label: 'Other', icon: QuestionMarkMajor },
+    { id: 'other', label: 'Other', icon: QuestionCircleIcon },
   ];
 
   const commonQuestions = [
@@ -290,12 +290,12 @@ function SupportChat({ shopDomain, userEmail, userName }: SupportChatProps) {
             <ButtonGroup segmented>
               <Button
                 plain
-                icon={isMinimized ? MaximizeMajor : MinimizeMajor}
+                icon={isMinimized ? MaximizeIcon : MinimizeIcon}
                 onClick={toggleMinimize}
               />
               <Button
                 plain
-                icon={CancelMinor}
+                icon={XIcon}
                 onClick={toggleChat}
               />
             </ButtonGroup>
@@ -455,12 +455,12 @@ function SupportChat({ shopDomain, userEmail, userName }: SupportChatProps) {
               </LegacyStack.Item>
               <Button
                 primary
-                icon={SendMajor}
+                icon={SendIcon}
                 onClick={handleSendMessage}
                 disabled={!inputMessage.trim()}
               />
               <Button
-                icon={AttachmentMajor}
+                icon={AttachmentIcon}
                 onClick={() => {}}
                 accessibilityLabel="Attach file"
               />

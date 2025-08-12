@@ -18,7 +18,7 @@ import {
   ButtonGroup,
   Icon,
 } from '@shopify/polaris';
-import { PersonIcon, CheckCircleIcon, CirclePauseMajor, CircleCancelMajor } from '@shopify/polaris-icons';
+import { PersonIcon, CheckCircleIcon, PauseCircleIcon, XCircleIcon } from '@shopify/polaris-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import Decimal from 'decimal.js';
 import { format } from 'date-fns';
@@ -188,13 +188,13 @@ function EditSubscription() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'active':
-        return <Badge status="success">Active</Badge>;
+        return <Badge tone="success">Active</Badge>;
       case 'paused':
-        return <Badge status="warning">Paused</Badge>;
+        return <Badge tone="warning">Paused</Badge>;
       case 'cancelled':
-        return <Badge status="critical">Cancelled</Badge>;
+        return <Badge tone="critical">Cancelled</Badge>;
       default:
-        return <Badge status="neutral">{status}</Badge>;
+        return <Badge tone="base">{status}</Badge>;
     }
   };
 
@@ -206,7 +206,7 @@ function EditSubscription() {
     if (subscription.status === 'active') {
       actions.push({
         content: 'Pause Subscription',
-        icon: CirclePauseMajor,
+        icon: PauseCircleIcon,
         onAction: () => {
           setNewStatus('paused');
           setStatusModalActive(true);
@@ -227,7 +227,7 @@ function EditSubscription() {
       actions.push({
         content: 'Cancel Subscription',
         destructive: true,
-        icon: CircleCancelMajor,
+        icon: XCircleIcon,
         onAction: () => {
           setNewStatus('cancelled');
           setStatusModalActive(true);
@@ -255,10 +255,9 @@ function EditSubscription() {
   if (!subscription && !loading) {
     return (
       <Page 
-        breadcrumbs={[{ content: 'Subscriptions', url: '/subscriptions' }]}
         title="Subscription not found"
       >
-        <Banner status="critical">
+        <Banner tone="critical">
           <p>The subscription you're looking for could not be found.</p>
         </Banner>
       </Page>
@@ -295,7 +294,6 @@ function EditSubscription() {
 
   return (
     <Page
-      breadcrumbs={[{ content: 'Subscriptions', url: '/subscriptions' }]}
       title={`Edit subscription for ${subscription?.customer_email}`}
       primaryAction={{
         content: 'Save changes',
@@ -311,13 +309,13 @@ function EditSubscription() {
       ]}
     >
       {successBanner && (
-        <Banner status="success" onDismiss={() => setSuccessBanner(false)}>
+        <Banner tone="success" onDismiss={() => setSuccessBanner(false)}>
           <p>Subscription updated successfully!</p>
         </Banner>
       )}
 
       {errors.submit && (
-        <Banner status="critical" onDismiss={() => setErrors({ ...errors, submit: undefined })}>
+        <Banner tone="critical" onDismiss={() => setErrors({ ...errors, submit: undefined)}>
           <p>{errors.submit}</p>
         </Banner>
       )}
@@ -416,7 +414,11 @@ function EditSubscription() {
           </LegacyStack>
         </Card>
 
-        <Card sectioned title="Usage Statistics">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Usage Statistics</Text>
+          </Box>
+          <Box padding="400">
           <LegacyStack distribution="fillEvenly">
             <LegacyStack vertical alignment="center">
               <Text variant="headingLg" as="h3">
@@ -436,9 +438,14 @@ function EditSubscription() {
               </Text>
             </LegacyStack>
           </LegacyStack>
+          </Box>
         </Card>
 
-        <Card sectioned title="Notes">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Notes</Text>
+          </Box>
+          <Box padding="400">
           <TextField
             label=""
             value={formData.notes}
@@ -448,9 +455,11 @@ function EditSubscription() {
             placeholder="Add any notes about this subscription discount..."
             helpText="Internal notes for managing this subscription"
           />
+          </Box>
         </Card>
 
-        <Card sectioned>
+        <Card>
+          <Box padding="400">
           <LegacyStack distribution="fillEvenly">
             <ButtonGroup>
               {subscription?.status === 'active' && (
@@ -459,7 +468,7 @@ function EditSubscription() {
                     setNewStatus('paused');
                     setStatusModalActive(true);
                   }}
-                  icon={CirclePauseMajor}
+                  icon={PauseCircleIcon}
                 >
                   Pause Subscription
                 </Button>
@@ -472,7 +481,7 @@ function EditSubscription() {
                     setStatusModalActive(true);
                   }}
                   icon={CheckCircleIcon}
-                  primary
+                  variant="primary"
                 >
                   Resume Subscription
                 </Button>
@@ -484,14 +493,15 @@ function EditSubscription() {
                     setNewStatus('cancelled');
                     setStatusModalActive(true);
                   }}
-                  icon={CircleCancelMajor}
-                  destructive
+                  icon={XCircleIcon}
+                  variant="primary" tone="critical"
                 >
                   Cancel Subscription
                 </Button>
               )}
             </ButtonGroup>
           </LegacyStack>
+          </Box>
         </Card>
       </FormLayout>
 
