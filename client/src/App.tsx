@@ -5,6 +5,7 @@ import enTranslations from '@shopify/polaris/locales/en.json';
 import '@shopify/polaris/build/esm/styles.css';
 
 import AppBridgeProvider from './providers/AppBridgeProvider';
+import ErrorBoundary from './components/ErrorBoundary';
 import EnhancedDashboard from './pages/EnhancedDashboard';
 import DiscountList from './pages/DiscountList';
 import CreateDiscount from './pages/CreateDiscount';
@@ -18,11 +19,12 @@ import Layout from './components/Layout';
 
 function App() {
   return (
-    <AppProvider i18n={enTranslations}>
-      <AppBridgeProvider>
-        <Router>
-          <Layout>
-            <Routes>
+    <ErrorBoundary>
+      <AppProvider i18n={enTranslations}>
+        <AppBridgeProvider>
+          <Router>
+            <Layout>
+              <Routes>
               <Route path="/" element={<EnhancedDashboard />} />
               <Route path="/billing" element={<Billing />} />
               <Route path="/discounts" element={<DiscountList />} />
@@ -33,10 +35,11 @@ function App() {
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />
             </Routes>
-          </Layout>
-        </Router>
-      </AppBridgeProvider>
-    </AppProvider>
+            </Layout>
+          </Router>
+        </AppBridgeProvider>
+      </AppProvider>
+    </ErrorBoundary>
   );
 }
 
