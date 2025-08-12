@@ -19,13 +19,15 @@ import {
 } from '@shopify/polaris';
 import {
   CheckCircleIcon,
-  CircleDisableMinor,
+  XCircleIcon,
   StarFilledIcon,
   AlertDiamondIcon,
   CashDollarIcon,
-  TrophyMajor,
-  RocketMajor,
-  HeartMajor,
+  TrophyIcon,
+  RocketIcon,
+  HeartIcon,
+  ChartLineIcon,
+  PersonIcon,
 } from '@shopify/polaris-icons';
 import { useNavigate } from 'react-router-dom';
 import { useAppBridge } from '@shopify/app-bridge-react';
