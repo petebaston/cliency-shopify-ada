@@ -8,6 +8,7 @@ import {
   SettingsMajor,
 } from '@shopify/polaris-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
+import SupportChat from './SupportChat';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -140,6 +141,11 @@ function Layout({ children }: LayoutProps) {
       {toastActive && (
         <Toast content={toastMessage} onDismiss={toggleToast} />
       )}
+      <SupportChat 
+        shopDomain="demo-store.myshopify.com"
+        userEmail="merchant@example.com"
+        userName="Merchant"
+      />
     </Frame>
   );
 }
