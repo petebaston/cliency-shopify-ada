@@ -6,6 +6,7 @@ import {
   OrdersMajor,
   AnalyticsMajor,
   SettingsMajor,
+  ChatMajor,
 } from '@shopify/polaris-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SupportChat from './SupportChat';
@@ -117,6 +118,14 @@ function Layout({ children }: LayoutProps) {
             icon: SettingsMajor,
             selected: location.pathname === '/settings',
             onClick: () => navigate('/settings'),
+          },
+          {
+            url: '/admin/support',
+            label: 'Admin Support',
+            icon: ChatMajor,
+            selected: location.pathname === '/admin/support',
+            onClick: () => navigate('/admin/support'),
+            badge: '3', // Number of pending tickets
           },
         ]}
       />

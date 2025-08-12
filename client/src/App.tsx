@@ -35,6 +35,7 @@ function App() {
               <Route path="/subscriptions/:id/edit" element={<EditSubscription />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/admin/support" element={<AdminSupport />} />
             </Routes>
             </Layout>
           </Router>
