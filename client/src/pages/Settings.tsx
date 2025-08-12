@@ -310,6 +310,7 @@ function Settings() {
                 error={errors.max_discount_percentage}
                 suffix="%"
                 helpText="Maximum percentage discount that can be created"
+                autoComplete="off"
               />
               <Checkbox
                 label="Allow discount stacking"
@@ -335,6 +336,7 @@ function Settings() {
                 </Box>
               )}
             </FormLayout>
+            </Box>
           </Card>
 
           <Card>
@@ -371,10 +373,12 @@ function Settings() {
                     error={errors.usage_alert_threshold}
                     suffix="%"
                     helpText="Send alert when discount reaches this percentage of usage limit"
+                    autoComplete="off"
                   />
                 </Box>
               )}
             </FormLayout>
+            </Box>
           </Card>
 
           <Card>

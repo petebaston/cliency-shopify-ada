@@ -380,7 +380,6 @@ function SubscriptionList() {
               'Actions',
             ]}
             rows={rows}
-            loading={loading}
           />
           {totalPages > 1 && (
             <Box padding="400">
