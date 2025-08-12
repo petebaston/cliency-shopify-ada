@@ -4,6 +4,7 @@
   "description": "Advanced Shopify discount management app with subscription support",
   "main": "server/index.js",
   "scripts": {
+    "setup": "node scripts/setup-database.js",
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "server:dev": "nodemon server/index.js",
     "client:dev": "cd client && npm run dev",
