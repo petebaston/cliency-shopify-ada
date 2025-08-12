@@ -13,6 +13,7 @@ const subscriptionRoutes = require('./routes/subscriptions');
 const billingRoutes = require('./routes/billing');
 const gdprRoutes = require('./routes/gdpr');
 const webhookRoutes = require('./routes/webhooks');
+const supportRoutes = require('./routes/support');
 
 // Middleware
 const { verifySessionToken, requiresActiveBilling, rateLimit } = require('./middleware/auth');
@@ -211,6 +212,7 @@ app.use('/api/billing', billingRoutes);
 app.use('/api/discounts', requiresActiveBilling, rateLimit(100, 60000), discountRoutes);
 app.use('/api/subscriptions', requiresActiveBilling, rateLimit(100, 60000), subscriptionRoutes);
 app.use('/api/webhooks', webhookRoutes);
+app.use('/api/support', supportRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

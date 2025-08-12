@@ -15,6 +15,7 @@ import EditSubscription from './pages/EditSubscription';
 import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
 import Billing from './pages/Billing';
+import AdminSupport from './pages/AdminSupport';
 import Layout from './components/Layout';
 
 function App() {
