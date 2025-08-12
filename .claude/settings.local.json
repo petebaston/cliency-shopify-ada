@@ -4,7 +4,8 @@
       "Bash(npm init:*)",
       "Bash(npx create-react-app:*)",
       "Bash(npm install:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }

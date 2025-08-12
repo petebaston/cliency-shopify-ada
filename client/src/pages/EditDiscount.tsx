@@ -12,14 +12,12 @@ import {
   LegacyStack,
   RadioButton,
   Popover,
-  Icon,
   Text,
   Box,
   Loading,
   Modal,
   TextContainer,
 } from '@shopify/polaris';
-import { CalendarMinor } from '@shopify/polaris-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import Decimal from 'decimal.js';
 import api from '../services/api';
@@ -424,7 +422,6 @@ function EditDiscount() {
                   <TextField
                     label="Start date"
                     value={formData.starts_at?.toLocaleDateString() || ''}
-                    prefix={<Icon source={CalendarMinor} />}
                     onFocus={() => setDatePickerActive('start')}
                     autoComplete="off"
                   />
@@ -448,7 +445,6 @@ function EditDiscount() {
                   <TextField
                     label="End date (optional)"
                     value={formData.ends_at?.toLocaleDateString() || ''}
-                    prefix={<Icon source={CalendarMinor} />}
                     onFocus={() => setDatePickerActive('end')}
                     autoComplete="off"
                     placeholder="No end date"

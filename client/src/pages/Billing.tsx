@@ -17,18 +17,6 @@ import {
   ButtonGroup,
   Divider,
 } from '@shopify/polaris';
-import {
-  CheckCircleIcon,
-  XCircleIcon,
-  StarFilledIcon,
-  AlertDiamondIcon,
-  CashDollarIcon,
-  TrophyIcon,
-  RocketIcon,
-  HeartIcon,
-  ChartLineIcon,
-  PersonIcon,
-} from '@shopify/polaris-icons';
 import { useNavigate } from 'react-router-dom';
 import { useAppBridge } from '@shopify/app-bridge-react';
 import { Redirect } from '@shopify/app-bridge/actions';
@@ -127,7 +115,6 @@ function Billing() {
       name: 'Pro',
       price: 199,
       interval: 'month',
-      icon: AlertDiamondIcon,
       color: '#9C6ADE',
       features: [
         { text: 'Everything in Growth', included: true },
@@ -278,7 +265,7 @@ function Billing() {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                    <Icon source={CashDollarIcon} tone="base" />
+                    <Text variant="bodyLg" as="span">$</Text>
                   </div>
                   <LegacyStack vertical spacing="extraTight">
                     <Text variant="headingMd" as="h3">
@@ -318,7 +305,6 @@ function Billing() {
             <LegacyStack alignment="center" distribution="equalSpacing">
               <LegacyStack vertical spacing="tight">
                 <LegacyStack alignment="center" spacing="tight">
-                  <Icon source={ChartLineIcon} tone="success" />
                   <Text variant="headingMd" as="h3">
                     Average ROI with our app
                   </Text>
@@ -343,7 +329,7 @@ function Billing() {
               {plan.popular && (
                 <Box padding="200" background="bg-surface-warning">
                   <LegacyStack alignment="center" distribution="center" spacing="tight">
-                    <Icon source={StarFilledIcon} tone="warning" />
+                    <Text variant="bodyLg" as="span">★</Text>
                     <Text variant="bodySm" as="p" fontWeight="bold">
                       MOST POPULAR
                     </Text>
@@ -363,7 +349,6 @@ function Billing() {
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
-                      <Icon source={plan.icon} tone="base" />
                     </div>
                   </LegacyStack>
                   
@@ -430,7 +415,7 @@ function Billing() {
           <Grid>
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={HeartIcon} tone="critical" />
+                <Text variant="bodyLg" as="span">♥</Text>
                 <Text variant="headingSm" as="h4">
                   Save Time
                 </Text>
@@ -454,7 +439,7 @@ function Billing() {
             
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={PersonIcon} tone="interactive" />
+                <Text variant="bodyLg" as="span">👤</Text>
                 <Text variant="headingSm" as="h4">
                   Happy Customers
                 </Text>
@@ -466,7 +451,7 @@ function Billing() {
             
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={RocketIcon} tone="warning" />
+                <Text variant="bodyLg" as="span">🚀</Text>
                 <Text variant="headingSm" as="h4">
                   Quick Setup
                 </Text>

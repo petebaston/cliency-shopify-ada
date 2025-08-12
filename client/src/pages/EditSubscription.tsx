@@ -16,9 +16,7 @@ import {
   Badge,
   Divider,
   ButtonGroup,
-  Icon,
 } from '@shopify/polaris';
-import { PersonIcon, CheckCircleIcon, PauseCircleIcon, XCircleIcon } from '@shopify/polaris-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import Decimal from 'decimal.js';
 import { format } from 'date-fns';
@@ -206,7 +204,6 @@ function EditSubscription() {
     if (subscription.status === 'active') {
       actions.push({
         content: 'Pause Subscription',
-        icon: PauseCircleIcon,
         onAction: () => {
           setNewStatus('paused');
           setStatusModalActive(true);
@@ -215,7 +212,6 @@ function EditSubscription() {
     } else if (subscription.status === 'paused') {
       actions.push({
         content: 'Resume Subscription',
-        icon: CheckCircleIcon,
         onAction: () => {
           setNewStatus('active');
           setStatusModalActive(true);
@@ -227,7 +223,6 @@ function EditSubscription() {
       actions.push({
         content: 'Cancel Subscription',
         destructive: true,
-        icon: XCircleIcon,
         onAction: () => {
           setNewStatus('cancelled');
           setStatusModalActive(true);
@@ -330,7 +325,6 @@ function EditSubscription() {
         <Card sectioned title="Customer Information">
           <LegacyStack vertical spacing="tight">
             <LegacyStack alignment="center">
-              <Icon source={PersonIcon} />
               <Text variant="headingMd" as="h3">
                 {subscription?.customer_name || subscription?.customer_email}
               </Text>
@@ -473,7 +467,6 @@ function EditSubscription() {
                     setNewStatus('paused');
                     setStatusModalActive(true);
                   }}
-                  icon={PauseCircleIcon}
                 >
                   Pause Subscription
                 </Button>
@@ -485,7 +478,6 @@ function EditSubscription() {
                     setNewStatus('active');
                     setStatusModalActive(true);
                   }}
-                  icon={CheckCircleIcon}
                   variant="primary"
                 >
                   Resume Subscription
@@ -498,7 +490,6 @@ function EditSubscription() {
                     setNewStatus('cancelled');
                     setStatusModalActive(true);
                   }}
-                  icon={XCircleIcon}
                   variant="primary" tone="critical"
                 >
                   Cancel Subscription
