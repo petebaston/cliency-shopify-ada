@@ -16,6 +16,7 @@ import {
   ButtonGroup,
   Popover,
   ActionList,
+  Box,
 } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
@@ -346,7 +347,7 @@ function SubscriptionList() {
         emptyStateMarkup
       ) : (
         <Card>
-          <Card.Section>
+          <Box padding="400">
             <Filters
               queryValue={queryValue}
               filters={filters}
@@ -356,7 +357,7 @@ function SubscriptionList() {
               onClearAll={handleClearAll}
               queryPlaceholder="Search by customer email"
             />
-          </Card.Section>
+          </Box>
           <DataTable
             columnContentTypes={[
               'text',
@@ -379,9 +380,6 @@ function SubscriptionList() {
               'Actions',
             ]}
             rows={rows}
-            selectable
-            selectedRows={selectedSubscriptions}
-            onSelectionChange={setSelectedSubscriptions}
             loading={loading}
           />
           {totalPages > 1 && (

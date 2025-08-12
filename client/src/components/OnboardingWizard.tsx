@@ -16,13 +16,14 @@ import {
   Card,
   VideoThumbnail,
   Checkbox,
+  Badge,
 } from '@shopify/polaris';
 import {
-  CircleTickMajor,
-  CircleInformationMajor,
-  StarFilledMinor,
-  TipsMajor,
-  PlayCircleMajor,
+  CheckCircleIcon,
+  InfoIcon,
+  StarFilledIcon,
+  LightbulbIcon,
+  PlayCircleIcon,
 } from '@shopify/polaris-icons';
 import confetti from 'canvas-confetti';
 import api from '../services/api';
@@ -116,25 +117,25 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                     <List type="bullet">
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={StarFilledMinor} color="warning" />
+                          <Icon source={StarFilledIcon} color="warning" />
                           <Text as="span">Personalized discount recommendations based on your store data</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={StarFilledMinor} color="warning" />
+                          <Icon source={StarFilledIcon} color="warning" />
                           <Text as="span">Automated discount campaigns that boost sales</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={StarFilledMinor} color="warning" />
+                          <Icon source={StarFilledIcon} color="warning" />
                           <Text as="span">Real-time analytics to track your success</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={StarFilledMinor} color="warning" />
+                          <Icon source={StarFilledIcon} color="warning" />
                           <Text as="span">24/7 support and regular feature updates</Text>
                         </LegacyStack>
                       </List.Item>
@@ -145,7 +146,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
             </Box>
 
             <Box paddingBlockStart="400">
-              <Banner status="info" icon={TipsMajor}>
+              <Banner status="info" icon={LightbulbIcon}>
                 <Text as="p" fontWeight="semibold">
                   Pro Tip: Stores using our app see an average 23% increase in conversion rates!
                 </Text>
@@ -194,7 +195,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                           </Text>
                         </LegacyStack.Item>
                         {wizardData.businessGoal === goal.value && (
-                          <Icon source={CircleTickMajor} color="success" />
+                          <Icon source={CheckCircleIcon} color="success" />
                         )}
                       </LegacyStack>
                     </div>
@@ -330,7 +331,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                           </LegacyStack>
                         </LegacyStack.Item>
                         {wizardData.discountStrategy === strategy.value && (
-                          <Icon source={CircleTickMajor} color="success" />
+                          <Icon source={CheckCircleIcon} color="success" />
                         )}
                       </LegacyStack>
                     </div>
@@ -385,7 +386,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
             </Box>
 
             <Box paddingBlockStart="400">
-              <Banner status="info" icon={PlayCircleMajor}>
+              <Banner status="info" icon={PlayCircleIcon}>
                 <Text as="p">
                   <strong>Watch our 2-minute tutorial</strong> to see how successful merchants use our app
                 </Text>
@@ -424,25 +425,25 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                     <List>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={CircleTickMajor} color="success" />
+                          <Icon source={CheckCircleIcon} color="success" />
                           <Text as="span">3 active discount campaigns tailored to your goals</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={CircleTickMajor} color="success" />
+                          <Icon source={CheckCircleIcon} color="success" />
                           <Text as="span">Automated subscription discounts for loyal customers</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={CircleTickMajor} color="success" />
+                          <Icon source={CheckCircleIcon} color="success" />
                           <Text as="span">Smart analytics tracking your performance</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={CircleTickMajor} color="success" />
+                          <Icon source={CheckCircleIcon} color="success" />
                           <Text as="span">Weekly optimization recommendations</Text>
                         </LegacyStack>
                       </List.Item>

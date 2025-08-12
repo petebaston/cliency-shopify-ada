@@ -18,11 +18,11 @@ import {
   Divider,
 } from '@shopify/polaris';
 import {
-  CircleTickMajor,
+  CheckCircleIcon,
   CircleDisableMinor,
-  StarFilledMinor,
-  DiamondAlertMajor,
-  CashDollarMajor,
+  StarFilledIcon,
+  AlertDiamondIcon,
+  CashDollarIcon,
   TrophyMajor,
   RocketMajor,
   HeartMajor,
@@ -125,7 +125,7 @@ function Billing() {
       name: 'Pro',
       price: 199,
       interval: 'month',
-      icon: DiamondAlertMajor,
+      icon: AlertDiamondIcon,
       color: '#9C6ADE',
       features: [
         { text: 'Everything in Growth', included: true },
@@ -275,7 +275,7 @@ function Billing() {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                    <Icon source={CashDollarMajor} color="base" />
+                    <Icon source={CashDollarIcon} color="base" />
                   </div>
                   <LegacyStack vertical spacing="extraTight">
                     <Text variant="headingMd" as="h3">
@@ -315,7 +315,7 @@ function Billing() {
             <LegacyStack alignment="center" distribution="equalSpacing">
               <LegacyStack vertical spacing="tight">
                 <LegacyStack alignment="center" spacing="tight">
-                  <Icon source={TrendingUpMajor} color="success" />
+                  <Icon source={ChartLineIcon} color="success" />
                   <Text variant="headingMd" as="h3">
                     Average ROI with our app
                   </Text>
@@ -340,7 +340,7 @@ function Billing() {
               {plan.popular && (
                 <Box padding="200" background="bg-warning-subdued">
                   <LegacyStack alignment="center" distribution="center" spacing="tight">
-                    <Icon source={StarFilledMinor} color="warning" />
+                    <Icon source={StarFilledIcon} color="warning" />
                     <Text variant="bodySm" as="p" fontWeight="bold">
                       MOST POPULAR
                     </Text>
@@ -385,7 +385,7 @@ function Billing() {
                       <List.Item key={index}>
                         <LegacyStack spacing="tight">
                           <Icon
-                            source={feature.included ? CircleTickMajor : CircleDisableMinor}
+                            source={feature.included ? CheckCircleIcon : CircleDisableMinor}
                             color={feature.included ? 'success' : 'subdued'}
                           />
                           <Text
@@ -435,7 +435,7 @@ function Billing() {
             
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={TrendingUpMajor} color="success" />
+                <Icon source={ChartLineIcon} color="success" />
                 <Text variant="headingSm" as="h4">
                   Increase Sales
                 </Text>
@@ -447,7 +447,7 @@ function Billing() {
             
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={CustomersMajor} color="interactive" />
+                <Icon source={PersonIcon} color="interactive" />
                 <Text variant="headingSm" as="h4">
                   Happy Customers
                 </Text>

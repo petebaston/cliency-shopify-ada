@@ -16,11 +16,10 @@ import {
   Divider,
 } from '@shopify/polaris';
 import {
-  CashDollarMajor,
-  TrendingUpMajor,
-  AnalyticsMajor,
-  CircleTickMajor,
-  DiamondAlertMajor,
+  CashDollarIcon,
+  ChartLineIcon,
+  CheckCircleIcon,
+  AlertDiamondIcon,
 } from '@shopify/polaris-icons';
 import Decimal from 'decimal.js';
 
@@ -142,7 +141,7 @@ function RevenueCalculator() {
                 alignItems: 'center',
                 justifyContent: 'center'
               }}>
-                <Icon source={CashDollarMajor} color="base" />
+                <Icon source={CashDollarIcon} color="base" />
               </div>
               <LegacyStack vertical spacing="extraTight">
                 <Text variant="headingMd" as="h3">
@@ -247,7 +246,7 @@ function RevenueCalculator() {
                 <Box padding="400" borderInlineEndWidth="1" borderColor="border-subdued">
                   <LegacyStack vertical spacing="tight">
                     <LegacyStack alignment="center" spacing="tight">
-                      <Icon source={TrendingUpMajor} color="success" />
+                      <Icon source={ChartLineIcon} color="success" />
                       <Text variant="headingSm" as="h4" color="subdued">
                         Revenue Increase
                       </Text>
@@ -264,7 +263,7 @@ function RevenueCalculator() {
                 <Box padding="400" borderInlineEndWidth="1" borderColor="border-subdued">
                   <LegacyStack vertical spacing="tight">
                     <LegacyStack alignment="center" spacing="tight">
-                      <Icon source={AnalyticsMajor} color="success" />
+                      <Icon source={ChartLineIcon} color="success" />
                       <Text variant="headingSm" as="h4" color="subdued">
                         Additional Orders
                       </Text>
@@ -281,7 +280,7 @@ function RevenueCalculator() {
                 <Box padding="400">
                   <LegacyStack vertical spacing="tight">
                     <LegacyStack alignment="center" spacing="tight">
-                      <Icon source={CashDollarMajor} color="success" />
+                      <Icon source={CashDollarIcon} color="success" />
                       <Text variant="headingSm" as="h4" color="subdued">
                         ROI
                       </Text>

@@ -17,20 +17,20 @@ import {
   Collapsible,
 } from '@shopify/polaris';
 import {
-  ChatMajor,
+  ChatIcon,
   SendMajor,
-  CircleTickMajor,
+  CheckCircleIcon,
   AttachmentMajor,
   QuestionMarkMajor,
-  ClockMajor,
-  ChevronDownMinor,
-  ChevronUpMinor,
+  ClockIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
   MinimizeMajor,
   MaximizeMajor,
   CancelMinor,
-  CashDollarMajor,
-  DiamondAlertMajor,
-  LightBulbMajor,
+  CashDollarIcon,
+  AlertDiamondIcon,
+  LightbulbIcon,
 } from '@shopify/polaris-icons';
 import { format } from 'date-fns';
 import api from '../services/api';
@@ -65,9 +65,9 @@ function SupportChat({ shopDomain, userEmail, userName }: SupportChatProps) {
   const [activePopover, setActivePopover] = useState(false);
 
   const quickActions = [
-    { id: 'billing', label: 'Billing Question', icon: CashDollarMajor },
-    { id: 'technical', label: 'Technical Issue', icon: DiamondAlertMajor },
-    { id: 'feature', label: 'Feature Request', icon: LightBulbMajor },
+    { id: 'billing', label: 'Billing Question', icon: CashDollarIcon },
+    { id: 'technical', label: 'Technical Issue', icon: AlertDiamondIcon },
+    { id: 'feature', label: 'Feature Request', icon: LightbulbIcon },
     { id: 'other', label: 'Other', icon: QuestionMarkMajor },
   ];
 
@@ -220,7 +220,7 @@ function SupportChat({ shopDomain, userEmail, userName }: SupportChatProps) {
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
         position: 'relative',
       }}>
-        <Icon source={ChatMajor} color="base" />
+        <Icon source={ChatIcon} color="base" />
         {unreadCount > 0 && (
           <div style={{
             position: 'absolute',
@@ -371,7 +371,7 @@ function SupportChat({ shopDomain, userEmail, userName }: SupportChatProps) {
                       {format(message.timestamp, 'HH:mm')}
                     </Text>
                     {message.status === 'sent' && message.sender === 'user' && (
-                      <Icon source={CircleTickMajor} color="interactive" />
+                      <Icon source={CheckCircleIcon} color="interactive" />
                     )}
                     {message.status === 'sending' && <Spinner size="small" />}
                   </div>

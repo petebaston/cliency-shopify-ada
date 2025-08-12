@@ -237,7 +237,7 @@ function Settings() {
       ]}
     >
       {successBanner && (
-        <Banner status="success" onDismiss={() => setSuccessBanner(false)}>
+        <Banner tone="success" onDismiss={() => setSuccessBanner(false)}>
           <p>Settings saved successfully!</p>
         </Banner>
       )}
@@ -365,7 +365,11 @@ function Settings() {
             </FormLayout>
           </Card>
 
-          <Card sectioned title="Integrations">
+          <Card>
+            <Box padding="400">
+              <Text variant="headingMd" as="h3">Integrations</Text>
+            </Box>
+            <Box padding="400">
             <FormLayout>
               <LegacyStack vertical>
                 <TextField
@@ -376,6 +380,7 @@ function Settings() {
                   error={errors.webhook_url}
                   placeholder="https://your-app.com/webhooks/discounts"
                   helpText="Receive real-time notifications when discounts are used"
+                  autoComplete="url"
                 />
                 {settings.webhook_url && (
                   <LegacyStack alignment="center">
@@ -387,7 +392,7 @@ function Settings() {
                       Test Webhook
                     </Button>
                     {webhookTestResult && (
-                      <Badge status={webhookTestResult === 'success' ? 'success' : 'critical'}>
+                      <Badge tone={webhookTestResult === 'success' ? 'success' : 'critical'}>
                         {webhookTestResult === 'success' ? 'Success' : 'Failed'}
                       </Badge>
                     )}
@@ -401,16 +406,22 @@ function Settings() {
                 onChange={(value) => handleInputChange('api_rate_limit', parseInt(value) || 0)}
                 error={errors.api_rate_limit}
                 helpText="Maximum API requests allowed per hour"
+                autoComplete="off"
               />
             </FormLayout>
+            </Box>
           </Card>
 
-          <Card sectioned title="Data & Privacy">
+          <Card>
+            <Box padding="400">
+              <Text variant="headingMd" as="h3">Data & Privacy</Text>
+            </Box>
+            <Box padding="400">
             <LegacyStack vertical spacing="loose">
               <Text variant="headingMd" as="h3">
                 Data Retention
               </Text>
-              <Text variant="bodyMd" color="subdued">
+              <Text variant="bodyMd" as="p" tone="subdued">
                 Discount usage data is retained for 2 years for analytics purposes. 
                 Customer data is handled according to Shopify's privacy policies.
               </Text>
@@ -428,30 +439,36 @@ function Settings() {
                 Danger Zone
               </Text>
               <ButtonGroup>
-                <Button destructive onClick={() => setResetModalActive(true)}>
+                <Button variant="primary" tone="critical" onClick={() => setResetModalActive(true)}>
                   Reset All Settings
                 </Button>
               </ButtonGroup>
             </LegacyStack>
+            </Box>
           </Card>
         </Layout.Section>
 
-        <Layout.Section secondary>
-          <Card sectioned title="App Information">
+        <Layout.Section>
+          <Card>
+            <Box padding="400">
+              <Text variant="headingMd" as="h3">App Information</Text>
+            </Box>
+            <Box padding="400">
             <LegacyStack vertical spacing="loose">
               <LegacyStack distribution="fillEvenly">
-                <Text variant="bodyMd">Version:</Text>
-                <Text variant="bodyMd">v2.1.0</Text>
+                <Text variant="bodyMd" as="p">Version:</Text>
+                <Text variant="bodyMd" as="p">v2.1.0</Text>
               </LegacyStack>
               <LegacyStack distribution="fillEvenly">
-                <Text variant="bodyMd">Last Updated:</Text>
-                <Text variant="bodyMd">Jan 15, 2025</Text>
+                <Text variant="bodyMd" as="p">Last Updated:</Text>
+                <Text variant="bodyMd" as="p">Jan 15, 2025</Text>
               </LegacyStack>
               <LegacyStack distribution="fillEvenly">
-                <Text variant="bodyMd">Status:</Text>
-                <Badge status="success">Active</Badge>
+                <Text variant="bodyMd" as="p">Status:</Text>
+                <Badge tone="success">Active</Badge>
               </LegacyStack>
             </LegacyStack>
+            </Box>
           </Card>
 
           <Card>

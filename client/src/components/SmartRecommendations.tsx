@@ -15,16 +15,16 @@ import {
   Thumbnail,
 } from '@shopify/polaris';
 import {
-  LightBulbMajor,
-  TrendingUpMajor,
-  ClockMajor,
-  CustomersMajor,
-  CashDollarMajor,
-  ChevronDownMinor,
-  ChevronUpMinor,
-  StarFilledMinor,
-  DiamondAlertMajor,
-  ConfettiMajor,
+  LightbulbIcon,
+  ChartLineIcon,
+  ClockIcon,
+  PersonIcon,
+  CashDollarIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  StarFilledIcon,
+  AlertDiamondIcon,
+  ConfettiIcon,
 } from '@shopify/polaris-icons';
 import api from '../services/api';
 
@@ -65,7 +65,7 @@ function SmartRecommendations() {
           impact: 'Expected 45% increase in weekend sales',
           estimatedRevenue: 12500,
           confidence: 92,
-          icon: ConfettiMajor,
+          icon: ConfettiIcon,
           action: () => console.log('Creating holiday campaign'),
           details: [
             'Your competitors are offering 20% average discounts',
@@ -83,7 +83,7 @@ function SmartRecommendations() {
           impact: 'Potential $3,200/month revenue recovery',
           estimatedRevenue: 3200,
           confidence: 88,
-          icon: DiamondAlertMajor,
+          icon: AlertDiamondIcon,
           action: () => console.log('Optimizing welcome discount'),
           details: [
             'Current discount: 10% off first purchase',
@@ -101,7 +101,7 @@ function SmartRecommendations() {
           impact: 'Recover 23% of abandoned carts',
           estimatedRevenue: 8900,
           confidence: 85,
-          icon: CashDollarMajor,
+          icon: CashDollarIcon,
           action: () => console.log('Setting up cart recovery'),
           details: [
             '67% of your carts are abandoned',
@@ -119,7 +119,7 @@ function SmartRecommendations() {
           impact: 'Increase repeat purchase rate by 35%',
           estimatedRevenue: 6700,
           confidence: 79,
-          icon: CustomersMajor,
+          icon: PersonIcon,
           action: () => console.log('Creating loyalty discount'),
           details: [
             '143 customers qualify for this tier',
@@ -137,7 +137,7 @@ function SmartRecommendations() {
           impact: 'Increase AOV by $35',
           estimatedRevenue: 4500,
           confidence: 72,
-          icon: TrendingUpMajor,
+          icon: ChartLineIcon,
           action: () => console.log('Creating bundle discount'),
           details: [
             'Products: Premium Set, Starter Kit, Accessories Pack',
@@ -215,7 +215,7 @@ function SmartRecommendations() {
                 alignItems: 'center',
                 justifyContent: 'center'
               }}>
-                <Icon source={LightBulbMajor} color="base" />
+                <Icon source={LightbulbIcon} color="base" />
               </div>
               <LegacyStack vertical spacing="extraTight">
                 <Text variant="headingMd" as="h3">
@@ -290,13 +290,13 @@ function SmartRecommendations() {
                         </Text>
                         <LegacyStack spacing="loose">
                           <LegacyStack spacing="extraTight">
-                            <Icon source={TrendingUpMajor} color="success" />
+                            <Icon source={ChartLineIcon} color="success" />
                             <Text variant="bodySm" as="span" fontWeight="semibold">
                               {rec.impact}
                             </Text>
                           </LegacyStack>
                           <LegacyStack spacing="extraTight">
-                            <Icon source={CashDollarMajor} color="success" />
+                            <Icon source={CashDollarIcon} color="success" />
                             <Text variant="bodySm" as="span" fontWeight="semibold">
                               +${rec.estimatedRevenue.toLocaleString()}/mo
                             </Text>
@@ -319,13 +319,13 @@ function SmartRecommendations() {
                           <Button
                             plain
                             onClick={() => toggleExpanded(rec.id)}
-                            icon={isExpanded ? ChevronUpMinor : ChevronDownMinor}
+                            icon={isExpanded ? ChevronUpIcon : ChevronDownIcon}
                             ariaLabel="Toggle details"
                           />
                         </>
                       ) : (
                         <LegacyStack spacing="tight">
-                          <Icon source={CircleTickMajor} color="success" />
+                          <Icon source={CheckCircleIcon} color="success" />
                           <Text variant="bodySm" as="span" color="success">
                             Successfully applied!
                           </Text>
@@ -350,7 +350,7 @@ function SmartRecommendations() {
                               {rec.details.map((detail, index) => (
                                 <List.Item key={index}>
                                   <LegacyStack spacing="extraTight">
-                                    <Icon source={StarFilledMinor} color="warning" />
+                                    <Icon source={StarFilledIcon} color="warning" />
                                     <Text variant="bodyMd" as="span">
                                       {detail}
                                     </Text>
@@ -385,7 +385,7 @@ function SmartRecommendations() {
         <Box background="bg-subdued" padding="400" borderRadius="2">
           <LegacyStack alignment="center" distribution="equalSpacing">
             <LegacyStack alignment="center" spacing="tight">
-              <Icon source={ClockMajor} color="subdued" />
+              <Icon source={ClockIcon} color="subdued" />
               <Text variant="bodySm" as="p" color="subdued">
                 Recommendations update daily based on your store's performance
               </Text>

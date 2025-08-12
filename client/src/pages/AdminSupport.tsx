@@ -29,20 +29,20 @@ import {
   Checkbox,
 } from '@shopify/polaris';
 import {
-  ChatMajor,
-  EmailMajor,
-  ClockMajor,
-  CustomersMajor,
-  AnalyticsMajor,
-  NotificationMajor,
-  CircleTickMajor,
-  CircleAlertMajor,
-  StarFilledMinor,
-  StarOutlineMinor,
-  PhoneMajor,
-  RefreshMajor,
-  ExportMinor,
-  SettingsMajor,
+  ChatIcon,
+  EmailIcon,
+  ClockIcon,
+  PersonIcon,
+  ChartLineIcon,
+  NotificationIcon,
+  CheckCircleIcon,
+  AlertCircleIcon,
+  StarFilledIcon,
+  StarIcon,
+  PhoneIcon,
+  RefreshIcon,
+  ExportIcon,
+  SettingsIcon,
 } from '@shopify/polaris-icons';
 import { format, formatDistanceToNow } from 'date-fns';
 import api from '../services/api';
@@ -494,23 +494,23 @@ function AdminSupport() {
       title="Support Admin Dashboard"
       primaryAction={{
         content: 'Refresh',
-        icon: RefreshMajor,
+        icon: RefreshIcon,
         onAction: fetchTickets,
       }}
       secondaryActions={[
-        { content: 'Export', icon: ExportMinor },
-        { content: 'Settings', icon: SettingsMajor },
+        { content: 'Export', icon: ExportIcon },
+        { content: 'Settings', icon: SettingsIcon },
       ]}
     >
       {/* Stats Cards */}
       <Grid>
         {[
-          { label: 'Open Tickets', value: stats.open_tickets, color: 'critical', icon: CircleAlertMajor },
-          { label: 'In Progress', value: stats.in_progress, color: 'info', icon: ClockMajor },
-          { label: 'Resolved Today', value: stats.resolved_today, color: 'success', icon: CircleTickMajor },
-          { label: 'Avg Response', value: stats.avg_response_time, color: 'default', icon: ClockMajor },
-          { label: 'Satisfaction', value: `${stats.satisfaction_score}/5`, color: 'success', icon: StarFilledMinor },
-          { label: 'Pending Replies', value: stats.pending_replies, color: 'warning', icon: ChatMajor },
+          { label: 'Open Tickets', value: stats.open_tickets, color: 'critical', icon: AlertCircleIcon },
+          { label: 'In Progress', value: stats.in_progress, color: 'info', icon: ClockIcon },
+          { label: 'Resolved Today', value: stats.resolved_today, color: 'success', icon: CheckCircleIcon },
+          { label: 'Avg Response', value: stats.avg_response_time, color: 'default', icon: ClockIcon },
+          { label: 'Satisfaction', value: `${stats.satisfaction_score}/5`, color: 'success', icon: StarFilledIcon },
+          { label: 'Pending Replies', value: stats.pending_replies, color: 'warning', icon: ChatIcon },
         ].map((stat, index) => (
           <Grid.Cell key={index} columnSpan={{ xs: 6, sm: 6, md: 2, lg: 2, xl: 2 }}>
             <Card>
@@ -631,7 +631,7 @@ function AdminSupport() {
                             {[1, 2, 3, 4, 5].map(star => (
                               <Icon
                                 key={star}
-                                source={star <= 4.7 ? StarFilledMinor : StarOutlineMinor}
+                                source={star <= 4.7 ? StarFilledIcon : StarIcon}
                                 color="warning"
                               />
                             ))}

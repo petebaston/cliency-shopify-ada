@@ -1,113 +1,105 @@
-// This file is deprecated - use useApiClient hook instead
-// Keeping for backward compatibility during migration
+// Development API client - no App Bridge needed for local testing
 
-import { getSessionToken } from '@shopify/app-bridge/utilities';
-import { createApp } from '@shopify/app-bridge';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
-// Get App Bridge instance
-const getAppBridge = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const host = urlParams.get('host') || '';
+// Simple fetch wrapper for development
+const fetchWithAuth = async (url: string, options: RequestInit = {}) => {
+  const headers = new Headers(options.headers || {});
+  headers.set('Content-Type', 'application/json');
   
-  return createApp({
-    apiKey: process.env.REACT_APP_SHOPIFY_API_KEY || '',
-    host: host,
-  });
-};
-
-// Authenticated fetch function
-const authenticatedFetch = async (url: string, options: RequestInit = {}) => {
-  try {
-    const app = getAppBridge();
-    const token = await getSessionToken(app);
-    
-    if (!token) {
-      throw new Error('No session token available');
-    }
-
-    const headers = new Headers(options.headers || {});
-    headers.set('Authorization', `Bearer ${token}`);
-    headers.set('Content-Type', 'application/json');
-
-    const response = await fetch(url, {
-      ...options,
-      headers,
-    });
-
-    // Handle billing redirect
-    if (response.status === 402) {
-      const data = await response.json();
-      if (data.redirectUrl) {
-        window.location.href = data.redirectUrl;
-        return null;
-      }
-    }
-
-    // Handle token expiry
-    if (response.status === 401) {
-      const newToken = await getSessionToken(app);
-      if (newToken) {
-        headers.set('Authorization', `Bearer ${newToken}`);
-        return fetch(url, {
-          ...options,
-          headers,
-        });
-      }
-    }
-
-    return response;
-  } catch (error) {
-    console.error('Authenticated fetch error:', error);
-    throw error;
+  // In development, add mock session
+  if (process.env.NODE_ENV === 'development') {
+    headers.set('X-Shop-Domain', 'test-shop.myshopify.com');
   }
+
+  const response = await fetch(`${API_BASE_URL}${url}`, {
+    ...options,
+    headers,
+  });
+
+  // Handle billing redirect
+  if (response.status === 402) {
+    const data = await response.json();
+    if (data.redirectUrl) {
+      window.location.href = data.redirectUrl;
+      return null;
+    }
+  }
+
+  return response;
 };
 
-// API client object for backward compatibility
+// API client object
 const api = {
   get: async (endpoint: string) => {
-    const response = await authenticatedFetch(`/api${endpoint}`);
-    if (!response) return { data: null };
-    const data = await response.json();
-    return { data };
+    try {
+      const response = await fetchWithAuth(endpoint);
+      if (!response) return { data: null };
+      const data = await response.json();
+      return { data };
+    } catch (error) {
+      console.error('API GET error:', error);
+      return { data: null, error };
+    }
   },
 
   post: async (endpoint: string, data: any) => {
-    const response = await authenticatedFetch(`/api${endpoint}`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
-    if (!response) return { data: null };
-    const responseData = await response.json();
-    return { data: responseData };
+    try {
+      const response = await fetchWithAuth(endpoint, {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+      if (!response) return { data: null };
+      const responseData = await response.json();
+      return { data: responseData };
+    } catch (error) {
+      console.error('API POST error:', error);
+      return { data: null, error };
+    }
   },
 
   put: async (endpoint: string, data: any) => {
-    const response = await authenticatedFetch(`/api${endpoint}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    });
-    if (!response) return { data: null };
-    const responseData = await response.json();
-    return { data: responseData };
+    try {
+      const response = await fetchWithAuth(endpoint, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+      });
+      if (!response) return { data: null };
+      const responseData = await response.json();
+      return { data: responseData };
+    } catch (error) {
+      console.error('API PUT error:', error);
+      return { data: null, error };
+    }
   },
 
   delete: async (endpoint: string) => {
-    const response = await authenticatedFetch(`/api${endpoint}`, {
-      method: 'DELETE',
-    });
-    if (!response) return { data: null };
-    const responseData = await response.json();
-    return { data: responseData };
+    try {
+      const response = await fetchWithAuth(endpoint, {
+        method: 'DELETE',
+      });
+      if (!response) return { data: null };
+      const responseData = await response.json();
+      return { data: responseData };
+    } catch (error) {
+      console.error('API DELETE error:', error);
+      return { data: null, error };
+    }
   },
 
   patch: async (endpoint: string, data: any) => {
-    const response = await authenticatedFetch(`/api${endpoint}`, {
-      method: 'PATCH',
-      body: JSON.stringify(data),
-    });
-    if (!response) return { data: null };
-    const responseData = await response.json();
-    return { data: responseData };
+    try {
+      const response = await fetchWithAuth(endpoint, {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+      });
+      if (!response) return { data: null };
+      const responseData = await response.json();
+      return { data: responseData };
+    } catch (error) {
+      console.error('API PATCH error:', error);
+      return { data: null, error };
+    }
   },
 };
 

@@ -18,7 +18,7 @@ import {
   ButtonGroup,
   Icon,
 } from '@shopify/polaris';
-import { CustomersMajor, CircleTickMajor, CirclePauseMajor, CircleCancelMajor } from '@shopify/polaris-icons';
+import { PersonIcon, CheckCircleIcon, CirclePauseMajor, CircleCancelMajor } from '@shopify/polaris-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import Decimal from 'decimal.js';
 import { format } from 'date-fns';
@@ -215,7 +215,7 @@ function EditSubscription() {
     } else if (subscription.status === 'paused') {
       actions.push({
         content: 'Resume Subscription',
-        icon: CircleTickMajor,
+        icon: CheckCircleIcon,
         onAction: () => {
           setNewStatus('active');
           setStatusModalActive(true);
@@ -332,7 +332,7 @@ function EditSubscription() {
         <Card sectioned title="Customer Information">
           <LegacyStack vertical spacing="tight">
             <LegacyStack alignment="center">
-              <Icon source={CustomersMajor} />
+              <Icon source={PersonIcon} />
               <Text variant="headingMd" as="h3">
                 {subscription?.customer_name || subscription?.customer_email}
               </Text>
@@ -471,7 +471,7 @@ function EditSubscription() {
                     setNewStatus('active');
                     setStatusModalActive(true);
                   }}
-                  icon={CircleTickMajor}
+                  icon={CheckCircleIcon}
                   primary
                 >
                   Resume Subscription

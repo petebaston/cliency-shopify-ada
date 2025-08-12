@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Provider } from '@shopify/app-bridge-react';
+// App Bridge Provider is temporarily disabled for development
+// import { Provider } from '@shopify/app-bridge-react';
 import { Banner, Spinner } from '@shopify/polaris';
 
 interface AppBridgeProviderProps {
@@ -7,10 +8,16 @@ interface AppBridgeProviderProps {
 }
 
 function AppBridgeProvider({ children }: AppBridgeProviderProps) {
-  const [appBridgeConfig, setAppBridgeConfig] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // In development mode, skip App Bridge initialization
+    if (process.env.NODE_ENV === 'development') {
+      setLoading(false);
+      return;
+    }
+
     // Get shop domain from URL params
     const urlParams = new URLSearchParams(window.location.search);
     const shop = urlParams.get('shop');
@@ -28,26 +35,20 @@ function AppBridgeProvider({ children }: AppBridgeProviderProps) {
       return;
     }
 
-    const config = {
-      apiKey: process.env.REACT_APP_SHOPIFY_API_KEY || '',
-      host: host,
-      forceRedirect: true,
-    };
-
-    setAppBridgeConfig(config);
+    setLoading(false);
   }, []);
 
   if (error) {
     return (
       <div style={{ padding: '20px' }}>
-        <Banner status="critical" title="Configuration Error">
+        <Banner tone="critical">
           <p>{error}</p>
         </Banner>
       </div>
     );
   }
 
-  if (!appBridgeConfig) {
+  if (loading) {
     return (
       <div style={{ 
         display: 'flex', 
@@ -60,11 +61,8 @@ function AppBridgeProvider({ children }: AppBridgeProviderProps) {
     );
   }
 
-  return (
-    <Provider config={appBridgeConfig}>
-      {children}
-    </Provider>
-  );
+  // In development, just render children without App Bridge
+  return <>{children}</>;
 }
 
 export default AppBridgeProvider;

@@ -19,15 +19,15 @@ import {
   Tooltip,
 } from '@shopify/polaris';
 import {
-  TrendingUpMajor,
-  CashDollarMajor,
-  CustomersMajor,
-  DiscountsMajor,
-  NotificationMajor,
-  StarFilledMinor,
-  HeartMajor,
-  DiamondAlertMajor,
-  ConfettiMajor,
+  ChartLineIcon,
+  CashDollarIcon,
+  PersonIcon,
+  DiscountIcon,
+  NotificationIcon,
+  StarFilledIcon,
+  HeartIcon,
+  AlertDiamondIcon,
+  ConfettiIcon,
 } from '@shopify/polaris-icons';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
@@ -145,7 +145,7 @@ function EnhancedDashboard() {
       notifications.push({
         type: 'success',
         message: `Your conversion rate is ${stats.conversionRate}% - 3x higher than industry average!`,
-        icon: TrendingUpMajor,
+        icon: ChartLineIcon,
       });
     }
     
@@ -153,14 +153,14 @@ function EnhancedDashboard() {
       notifications.push({
         type: 'info',
         message: `You've saved customers $${stats.totalSavings.toLocaleString()} this month!`,
-        icon: HeartMajor,
+        icon: HeartIcon,
       });
     }
     
     notifications.push({
       type: 'tip',
       message: 'Create a weekend flash sale to boost Sunday sales by 40%',
-      icon: DiamondAlertMajor,
+      icon: AlertDiamondIcon,
     });
     
     setNotifications(notifications);
@@ -178,7 +178,7 @@ function EnhancedDashboard() {
       value: `$${stats.monthlyRevenue.toLocaleString()}`,
       change: '+28%',
       trend: 'positive' as const,
-      icon: CashDollarMajor,
+      icon: CashDollarIcon,
       color: '#5C6AC4',
       sparkline: true,
     },
@@ -187,7 +187,7 @@ function EnhancedDashboard() {
       value: stats.activeDiscounts.toString(),
       change: '+12%',
       trend: 'positive' as const,
-      icon: DiscountsMajor,
+      icon: DiscountIcon,
       color: '#50B83C',
       badge: 'Optimized',
     },
@@ -196,7 +196,7 @@ function EnhancedDashboard() {
       value: `$${stats.totalSavings.toLocaleString()}`,
       change: '+45%',
       trend: 'positive' as const,
-      icon: HeartMajor,
+      icon: HeartIcon,
       color: '#E4B0E4',
       tooltip: 'Total amount saved by your customers',
     },
@@ -205,7 +205,7 @@ function EnhancedDashboard() {
       value: `${stats.conversionRate}%`,
       change: '+3.2%',
       trend: 'positive' as const,
-      icon: TrendingUpMajor,
+      icon: ChartLineIcon,
       color: '#00A8E8',
       benchmark: '3x industry avg',
     },
@@ -214,7 +214,7 @@ function EnhancedDashboard() {
       value: stats.activeSubscriptions.toString(),
       change: '+18%',
       trend: 'positive' as const,
-      icon: CustomersMajor,
+      icon: PersonIcon,
       color: '#FFC58B',
     },
     {
@@ -222,7 +222,7 @@ function EnhancedDashboard() {
       value: `${stats.customerSatisfaction}⭐`,
       change: '+0.3',
       trend: 'positive' as const,
-      icon: StarFilledMinor,
+      icon: StarFilledIcon,
       color: '#FFD700',
     },
   ];
@@ -266,7 +266,7 @@ function EnhancedDashboard() {
         {item.name}
       </Text>
     </LegacyStack>,
-    <Badge status={item.is_active ? 'success' : 'neutral'}>
+    <Badge tone={item.is_active ? 'success' : 'neutral'}>
       {item.is_active ? 'Active' : 'Inactive'}
     </Badge>,
     item.discount_type.replace('_', ' '),
@@ -277,27 +277,13 @@ function EnhancedDashboard() {
       <Text variant="bodyMd" as="span">
         {item.usage_count}
       </Text>
-      {item.usage_count > 100 && <Badge status="success">🔥 Hot</Badge>}
+      {item.usage_count > 100 && <Badge tone="success">🔥 Hot</Badge>}
     </LegacyStack>,
   ]);
 
   return (
     <Page
-      title={
-        <LegacyStack alignment="center" spacing="tight">
-          <Text variant="heading2xl" as="h1">
-            Dashboard
-          </Text>
-          {stats.monthlyRevenue > 40000 && (
-            <Badge status="success" progress="complete">
-              <LegacyStack spacing="extraTight">
-                <Icon source={StarFilledMinor} />
-                <span>Top Performer</span>
-              </LegacyStack>
-            </Badge>
-          )}
-        </LegacyStack>
-      }
+      title="Dashboard"
       primaryAction={{
         content: 'Create Discount',
         onAction: () => navigate('/discounts/new'),
@@ -306,7 +292,7 @@ function EnhancedDashboard() {
         {
           content: 'Quick Setup',
           onAction: () => setShowOnboarding(true),
-          icon: ConfettiMajor,
+          icon: ConfettiIcon,
         },
         {
           content: 'View Analytics',
@@ -319,12 +305,13 @@ function EnhancedDashboard() {
         <Box paddingBlockEnd="400">
           <Banner
             title="Welcome back! You're doing amazing 🎉"
-            status="success"
+            tone="success"
             onDismiss={() => {}}
           >
             <p>
               Your discounts generated <strong>${(stats.monthlyRevenue * 0.15).toLocaleString()}</strong> in
               additional revenue this week. Keep up the great work!
+              {stats.monthlyRevenue > 40000 && " 🏆 Top Performer!"}
             </p>
           </Banner>
         </Box>
@@ -336,7 +323,7 @@ function EnhancedDashboard() {
           <Card>
             <Box padding="400" background="bg-subdued">
               <LegacyStack alignment="center" spacing="tight">
-                <Icon source={NotificationMajor} color="interactive" />
+                <Icon source={NotificationIcon} tone="interactive" />
                 <Text variant="headingSm" as="h3">
                   Smart Insights
                 </Text>
@@ -381,12 +368,12 @@ function EnhancedDashboard() {
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
-                      <Icon source={stat.icon} color="base" />
+                      <Icon source={stat.icon} tone="base" />
                     </div>
-                    {stat.badge && <Badge size="small">{stat.badge}</Badge>}
+                    {stat.badge && <Badge >{stat.badge}</Badge>}
                   </LegacyStack>
                   
-                  <Text variant="bodySm" as="p" color="subdued">
+                  <Text variant="bodySm" as="p" tone="subdued">
                     {stat.title}
                   </Text>
                   
@@ -396,13 +383,13 @@ function EnhancedDashboard() {
                     </Text>
                     {stat.tooltip && (
                       <Tooltip content={stat.tooltip}>
-                        <Icon source={DiamondAlertMajor} color="subdued" />
+                        <Icon source={AlertDiamondIcon} tone="subdued" />
                       </Tooltip>
                     )}
                   </LegacyStack>
                   
                   <LegacyStack alignment="center" distribution="equalSpacing">
-                    <Badge status={stat.trend === 'positive' ? 'success' : 'neutral'} size="small">
+                    <Badge tone={stat.trend === 'positive' ? 'success' : 'neutral'} >
                       {stat.change}
                     </Badge>
                     {stat.benchmark && (
@@ -477,7 +464,7 @@ function EnhancedDashboard() {
       {/* Quick Actions with Icons */}
       <Box paddingBlockStart="400">
         <Grid>
-          <Grid.Cell columnSpan={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}>
+          <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6, xl: 6 }}>
             <Card>
               <Box padding="400">
                 <Text variant="headingMd" as="h3">
