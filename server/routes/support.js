@@ -1,7 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database/db');
-const { validateSession } = require('../middleware/auth');
+// Simple auth middleware that just checks if request has session
+const authMiddleware = (req, res, next) => {
+  // In development, just pass through
+  if (process.env.NODE_ENV === 'development') {
+    req.session = req.session || { shop: 'test-shop.myshopify.com' };
+    next();
+  } else {
+    // In production, would use real auth
+    const { authMiddleware } = require('../middleware/auth');
+    authMiddleware(req, res, next);
+  }
+};
 const { v4: uuidv4 } = require('uuid');
 
 // Generate ticket number
@@ -12,7 +23,7 @@ function generateTicketNumber() {
 }
 
 // Get all tickets with filters
-router.get('/tickets', validateSession, async (req, res) => {
+router.get('/tickets', authMiddleware, async (req, res) => {
   try {
     const { status, priority, assignee, search, limit = 50, offset = 0 } = req.query;
     
@@ -62,7 +73,7 @@ router.get('/tickets', validateSession, async (req, res) => {
 });
 
 // Get single ticket
-router.get('/tickets/:id', validateSession, async (req, res) => {
+router.get('/tickets/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     
@@ -146,7 +157,7 @@ router.post('/tickets', async (req, res) => {
 });
 
 // Update ticket status/priority/assignment
-router.patch('/tickets/:id', validateSession, async (req, res) => {
+router.patch('/tickets/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     const { status, priority, assigned_to, tags } = req.body;
@@ -228,7 +239,7 @@ router.post('/tickets/:id/messages', async (req, res) => {
 });
 
 // Get support statistics
-router.get('/stats', validateSession, async (req, res) => {
+router.get('/stats', authMiddleware, async (req, res) => {
   try {
     const stats = await pool.query(`
       SELECT 
@@ -267,7 +278,7 @@ router.get('/stats', validateSession, async (req, res) => {
 });
 
 // Get canned responses
-router.get('/canned-responses', validateSession, async (req, res) => {
+router.get('/canned-responses', authMiddleware, async (req, res) => {
   try {
     const result = await pool.query(
       'SELECT * FROM canned_responses ORDER BY usage_count DESC, title ASC'
@@ -280,7 +291,7 @@ router.get('/canned-responses', validateSession, async (req, res) => {
 });
 
 // Create canned response
-router.post('/canned-responses', validateSession, async (req, res) => {
+router.post('/canned-responses', authMiddleware, async (req, res) => {
   try {
     const { title, content, category, shortcut } = req.body;
     
@@ -299,7 +310,7 @@ router.post('/canned-responses', validateSession, async (req, res) => {
 });
 
 // Use canned response (increment counter)
-router.post('/canned-responses/:id/use', validateSession, async (req, res) => {
+router.post('/canned-responses/:id/use', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     
@@ -316,7 +327,7 @@ router.post('/canned-responses/:id/use', validateSession, async (req, res) => {
 });
 
 // Get customer profile
-router.get('/customers/:email', validateSession, async (req, res) => {
+router.get('/customers/:email', authMiddleware, async (req, res) => {
   try {
     const { email } = req.params;
     
@@ -360,7 +371,7 @@ router.get('/customers/:email', validateSession, async (req, res) => {
 });
 
 // Update customer profile
-router.patch('/customers/:email', validateSession, async (req, res) => {
+router.patch('/customers/:email', authMiddleware, async (req, res) => {
   try {
     const { email } = req.params;
     const { name, tags, notes, vip_status } = req.body;

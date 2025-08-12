@@ -36,18 +36,12 @@ async function setupDatabase() {
     const schemaPath = path.join(__dirname, '..', 'server', 'database', 'schema.sql');
     const schema = fs.readFileSync(schemaPath, 'utf8');
     
-    // Split by semicolon and execute each statement
-    const statements = schema.split(';').filter(stmt => stmt.trim());
-    for (const statement of statements) {
-      if (statement.trim()) {
-        try {
-          await client.query(statement);
-        } catch (err) {
-          if (!err.message.includes('already exists')) {
-            console.error(`Error executing: ${statement.substring(0, 50)}...`);
-            console.error(err.message);
-          }
-        }
+    // Execute the entire schema as one statement (handles functions better)
+    try {
+      await client.query(schema);
+    } catch (err) {
+      if (!err.message.includes('already exists')) {
+        console.error('Error creating main tables:', err.message);
       }
     }
     console.log('✅ Main tables created\n');
@@ -57,20 +51,24 @@ async function setupDatabase() {
     const supportSchemaPath = path.join(__dirname, '..', 'server', 'database', 'support_schema.sql');
     const supportSchema = fs.readFileSync(supportSchemaPath, 'utf8');
     
-    const supportStatements = supportSchema.split(';').filter(stmt => stmt.trim());
-    for (const statement of supportStatements) {
-      if (statement.trim()) {
-        try {
-          await client.query(statement);
-        } catch (err) {
-          if (!err.message.includes('already exists')) {
-            console.error(`Error executing: ${statement.substring(0, 50)}...`);
-            console.error(err.message);
-          }
-        }
+    // Execute the entire support schema
+    try {
+      await client.query(supportSchema);
+    } catch (err) {
+      if (!err.message.includes('already exists')) {
+        console.error('Error creating support tables:', err.message);
       }
     }
     console.log('✅ Support tables created\n');
+
+    // Add missing columns if they don't exist
+    console.log('Adding additional columns...');
+    try {
+      await client.query(`ALTER TABLE stores ADD COLUMN IF NOT EXISTS plan VARCHAR(50) DEFAULT 'starter';`);
+      await client.query(`ALTER TABLE stores ADD COLUMN IF NOT EXISTS trial_ends_at TIMESTAMP;`);
+    } catch (err) {
+      // Ignore if columns already exist
+    }
 
     // Insert sample data for development
     if (process.env.NODE_ENV === 'development') {

@@ -454,35 +454,45 @@ function Settings() {
             </LegacyStack>
           </Card>
 
-          <Card sectioned title="Support">
-            <LegacyStack vertical spacing="loose">
-              <Button external url="https://help.shopify.com">
-                Help Documentation
-              </Button>
-              <Button external url="mailto:support@example.com">
-                Contact Support
-              </Button>
-              <Button external url="https://github.com/example/discount-app">
-                Report Issue
-              </Button>
-            </LegacyStack>
+          <Card>
+            <Box padding="400">
+              <Text variant="headingMd" as="h3">Support</Text>
+              <Box paddingBlockStart="400">
+                <LegacyStack vertical spacing="loose">
+                  <Button external url="https://help.shopify.com">
+                    Help Documentation
+                  </Button>
+                  <Button external url="mailto:support@example.com">
+                    Contact Support
+                  </Button>
+                  <Button external url="https://github.com/example/discount-app">
+                    Report Issue
+                  </Button>
+                </LegacyStack>
+              </Box>
+            </Box>
           </Card>
 
-          <Card sectioned title="Quick Stats">
-            <LegacyStack vertical spacing="tight">
-              <LegacyStack distribution="fillEvenly">
-                <Text variant="bodyMd" color="subdued">Total Discounts:</Text>
-                <Text variant="bodyMd">47</Text>
-              </LegacyStack>
-              <LegacyStack distribution="fillEvenly">
-                <Text variant="bodyMd" color="subdued">Active Discounts:</Text>
-                <Text variant="bodyMd">23</Text>
-              </LegacyStack>
-              <LegacyStack distribution="fillEvenly">
-                <Text variant="bodyMd" color="subdued">Total Savings:</Text>
-                <Text variant="bodyMd">$2,847.50</Text>
-              </LegacyStack>
-            </LegacyStack>
+          <Card>
+            <Box padding="400">
+              <Text variant="headingMd" as="h3">Quick Stats</Text>
+              <Box paddingBlockStart="400">
+                <LegacyStack vertical spacing="tight">
+                  <LegacyStack distribution="fillEvenly">
+                    <Text variant="bodyMd" as="p" tone="subdued">Total Discounts:</Text>
+                    <Text variant="bodyMd" as="p">47</Text>
+                  </LegacyStack>
+                  <LegacyStack distribution="fillEvenly">
+                    <Text variant="bodyMd" as="p" tone="subdued">Active Discounts:</Text>
+                    <Text variant="bodyMd" as="p">23</Text>
+                  </LegacyStack>
+                  <LegacyStack distribution="fillEvenly">
+                    <Text variant="bodyMd" as="p" tone="subdued">Total Savings:</Text>
+                    <Text variant="bodyMd" as="p">$2,847.50</Text>
+                  </LegacyStack>
+                </LegacyStack>
+              </Box>
+            </Box>
           </Card>
         </Layout.Section>
       </Layout>

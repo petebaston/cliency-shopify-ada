@@ -134,13 +134,13 @@ function SubscriptionList() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'active':
-        return <Badge status="success">Active</Badge>;
+        return <Badge tone="success">Active</Badge>;
       case 'paused':
-        return <Badge status="warning">Paused</Badge>;
+        return <Badge tone="warning">Paused</Badge>;
       case 'cancelled':
-        return <Badge status="critical">Cancelled</Badge>;
+        return <Badge tone="critical">Cancelled</Badge>;
       default:
-        return <Badge status="neutral">{status}</Badge>;
+        return <Badge>{status}</Badge>;
     }
   };
 
@@ -150,7 +150,7 @@ function SubscriptionList() {
       quarterly: 'Quarterly',
       yearly: 'Yearly',
     };
-    return <Badge status="info">{cycleLabels[cycle as keyof typeof cycleLabels] || cycle}</Badge>;
+    return <Badge tone="info">{cycleLabels[cycle as keyof typeof cycleLabels] || cycle}</Badge>;
   };
 
   const getActionItems = (subscription: SubscriptionDiscount) => {
@@ -176,7 +176,6 @@ function SubscriptionList() {
     if (subscription.status !== 'cancelled') {
       items.push({
         content: 'Cancel',
-        destructive: true,
         onAction: () => handleSingleAction(subscription.id, 'cancel'),
       });
     }
@@ -253,7 +252,7 @@ function SubscriptionList() {
         active={actionPopoverActive === subscription.id}
         activator={
           <Button
-            plain
+            variant="plain"
             onClick={() => setActionPopoverActive(
               actionPopoverActive === subscription.id ? null : subscription.id
             )}
@@ -386,7 +385,7 @@ function SubscriptionList() {
             loading={loading}
           />
           {totalPages > 1 && (
-            <Card.Section>
+            <Box padding="400">
               <Pagination
                 hasPrevious={currentPage > 1}
                 hasNext={currentPage < totalPages}
@@ -394,7 +393,7 @@ function SubscriptionList() {
                 onNext={() => setCurrentPage(currentPage + 1)}
                 label={`Page ${currentPage} of ${totalPages}`}
               />
-            </Card.Section>
+            </Box>
           )}
         </Card>
       )}

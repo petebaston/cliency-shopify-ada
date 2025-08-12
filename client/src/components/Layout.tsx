@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { Frame, Navigation, TopBar, Toast } from '@shopify/polaris';
 import {
-  HomeMajor,
-  DiscountsMajor,
-  OrdersMajor,
-  AnalyticsMajor,
-  SettingsMajor,
-  ChatMajor,
+  HomeIcon,
+  DiscountIcon,
+  OrderIcon,
+  ChartLineIcon,
+  SettingsIcon,
+  ChatIcon,
 } from '@shopify/polaris-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SupportChat from './SupportChat';
@@ -70,14 +70,14 @@ function Layout({ children }: LayoutProps) {
           {
             url: '/',
             label: 'Dashboard',
-            icon: HomeMajor,
+            icon: HomeIcon,
             selected: location.pathname === '/',
             onClick: () => navigate('/'),
           },
           {
             url: '/discounts',
             label: 'Discounts',
-            icon: DiscountsMajor,
+            icon: DiscountIcon,
             selected: location.pathname.startsWith('/discounts'),
             onClick: () => navigate('/discounts'),
             subNavigationItems: [
@@ -96,14 +96,14 @@ function Layout({ children }: LayoutProps) {
           {
             url: '/subscriptions',
             label: 'Subscriptions',
-            icon: OrdersMajor,
+            icon: OrderIcon,
             selected: location.pathname.startsWith('/subscriptions'),
             onClick: () => navigate('/subscriptions'),
           },
           {
             url: '/analytics',
             label: 'Analytics',
-            icon: AnalyticsMajor,
+            icon: ChartLineIcon,
             selected: location.pathname === '/analytics',
             onClick: () => navigate('/analytics'),
           },
@@ -115,14 +115,14 @@ function Layout({ children }: LayoutProps) {
           {
             url: '/settings',
             label: 'Settings',
-            icon: SettingsMajor,
+            icon: SettingsIcon,
             selected: location.pathname === '/settings',
             onClick: () => navigate('/settings'),
           },
           {
             url: '/admin/support',
             label: 'Admin Support',
-            icon: ChatMajor,
+            icon: ChatIcon,
             selected: location.pathname === '/admin/support',
             onClick: () => navigate('/admin/support'),
             badge: '3', // Number of pending tickets
