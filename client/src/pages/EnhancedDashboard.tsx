@@ -239,7 +239,7 @@ function EnhancedDashboard() {
       content: (
         <LegacyStack spacing="tight">
           <span>AI Recommendations</span>
-          <Badge status="attention">3 new</Badge>
+          <Badge tone="attention">3 new</Badge>
         </LegacyStack>
       ),
       accessibilityLabel: 'Recommendations',
@@ -266,11 +266,11 @@ function EnhancedDashboard() {
         {item.name}
       </Text>
     </LegacyStack>,
-    <Badge tone={item.is_active ? 'success' : 'neutral'}>
+    <Badge tone={item.is_active ? 'success' : 'base'}>
       {item.is_active ? 'Active' : 'Inactive'}
     </Badge>,
     item.discount_type.replace('_', ' '),
-    <Text variant="bodyMd" as="span" fontWeight="semibold" color="success">
+    <Text variant="bodyMd" as="span" fontWeight="semibold" tone="success">
       {item.discount_type === 'percentage' ? `${item.discount_value}%` : `$${item.discount_value}`}
     </Text>,
     <LegacyStack spacing="tight">
@@ -321,7 +321,7 @@ function EnhancedDashboard() {
       {notifications.length > 0 && (
         <Box paddingBlockEnd="400">
           <Card>
-            <Box padding="400" background="bg-subdued">
+            <Box padding="400" background="bg-surface-secondary">
               <LegacyStack alignment="center" spacing="tight">
                 <Icon source={NotificationIcon} tone="interactive" />
                 <Text variant="headingSm" as="h3">
@@ -338,7 +338,7 @@ function EnhancedDashboard() {
                       borderRadius: '4px',
                       backgroundColor: notif.type === 'success' ? '#E3F5E1' : '#E8F4F8',
                     }}>
-                      <Icon source={notif.icon} color={notif.type === 'success' ? 'success' : 'interactive'} />
+                      <Icon source={notif.icon} tone={notif.type === 'success' ? 'success' : 'interactive'} />
                     </div>
                     <Text variant="bodyMd" as="p">
                       {notif.message}
@@ -389,11 +389,11 @@ function EnhancedDashboard() {
                   </LegacyStack>
                   
                   <LegacyStack alignment="center" distribution="equalSpacing">
-                    <Badge tone={stat.trend === 'positive' ? 'success' : 'neutral'} >
+                    <Badge tone={stat.trend === 'positive' ? 'success' : 'base'} >
                       {stat.change}
                     </Badge>
                     {stat.benchmark && (
-                      <Text variant="bodySm" as="span" color="success" fontWeight="semibold">
+                      <Text variant="bodySm" as="span" tone="success" fontWeight="semibold">
                         {stat.benchmark}
                       </Text>
                     )}
@@ -420,7 +420,7 @@ function EnhancedDashboard() {
         <Card>
           <Tabs tabs={tabs} selected={selectedTab} onSelect={setSelectedTab}>
             {selectedTab === 0 && (
-              <Card.Section>
+              <Box padding="400">
                 <LegacyStack vertical>
                   <LegacyStack distribution="equalSpacing" alignment="center">
                     <Text variant="headingMd" as="h3">
@@ -428,7 +428,7 @@ function EnhancedDashboard() {
                     </Text>
                     <ButtonGroup>
                       <Button onClick={() => navigate('/discounts')}>View All</Button>
-                      <Button primary onClick={() => navigate('/discounts/new')}>
+                      <Button variant="primary" onClick={() => navigate('/discounts/new')}>
                         Create New
                       </Button>
                     </ButtonGroup>
@@ -443,19 +443,19 @@ function EnhancedDashboard() {
                     />
                   </Box>
                 </LegacyStack>
-              </Card.Section>
+              </Box>
             )}
             
             {selectedTab === 1 && (
-              <Card.Section>
+              <Box padding="400">
                 <SmartRecommendations />
-              </Card.Section>
+              </Box>
             )}
             
             {selectedTab === 2 && (
-              <Card.Section>
+              <Box padding="400">
                 <RevenueCalculator />
-              </Card.Section>
+              </Box>
             )}
           </Tabs>
         </Card>
