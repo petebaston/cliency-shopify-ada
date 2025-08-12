@@ -13,6 +13,7 @@ import {
   Banner,
   EmptyState,
   Pagination,
+  Box,
 } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
@@ -148,7 +149,7 @@ function DiscountList() {
 
   const rows = filteredDiscounts.map((discount) => [
     discount.name,
-    <Badge status={discount.is_active ? 'success' : 'neutral'}>
+    <Badge tone={discount.is_active ? 'success' : 'base'}>
       {discount.is_active ? 'Active' : 'Inactive'}
     </Badge>,
     discount.discount_type.replace('_', ' ').charAt(0).toUpperCase() + 
@@ -160,7 +161,7 @@ function DiscountList() {
     discount.applies_to.replace('_', ' ').slice(1),
     discount.usage_count || 0,
     discount.usage_limit || 'Unlimited',
-    <Button plain onClick={() => navigate(`/discounts/${discount.id}/edit`)}>
+    <Button variant="plain" onClick={() => navigate(`/discounts/${discount.id}/edit`)}>
       Edit
     </Button>,
   ]);
@@ -182,7 +183,7 @@ function DiscountList() {
       title="Delete discounts?"
       primaryAction={{
         content: 'Delete',
-        destructive: true,
+        tone: 'critical' as const,
         onAction: handleDeleteDiscounts,
       }}
       secondaryActions={[
@@ -217,7 +218,7 @@ function DiscountList() {
                 content: `Delete ${selectedDiscounts.length} discount${
                   selectedDiscounts.length > 1 ? 's' : ''
                 }`,
-                destructive: true,
+                tone: 'critical' as const,
                 onAction: () => setDeleteModalActive(true),
               },
             ]
@@ -228,7 +229,7 @@ function DiscountList() {
         emptyStateMarkup
       ) : (
         <Card>
-          <Card.Section>
+          <Box padding="400">
             <Filters
               queryValue={queryValue}
               filters={filters}
@@ -237,7 +238,7 @@ function DiscountList() {
               onQueryClear={handleQueryValueRemove}
               onClearAll={handleClearAll}
             />
-          </Card.Section>
+          </Box>
           <DataTable
             columnContentTypes={[
               'text',
@@ -263,14 +264,14 @@ function DiscountList() {
             showTotalsInFooter={false}
           />
           {filteredDiscounts.length > 20 && (
-            <Card.Section>
+            <Box padding="400">
               <Pagination
                 hasPrevious
                 hasNext
                 onPrevious={() => {}}
                 onNext={() => {}}
               />
-            </Card.Section>
+            </Box>
           )}
         </Card>
       )}
