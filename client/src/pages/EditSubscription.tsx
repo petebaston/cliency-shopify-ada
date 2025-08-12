@@ -354,7 +354,7 @@ function EditSubscription() {
               onChange={(value) => handleInputChange('discount_percentage', value)}
               error={errors.discount_percentage}
               suffix="%"
-              step="0.0001"
+              step={0.0001}
               autoComplete="off"
               helpText="Supports up to 4 decimal places (e.g., 12.7500%)"
             />
@@ -366,7 +366,7 @@ function EditSubscription() {
               onChange={(value) => handleInputChange('base_amount', value)}
               error={errors.base_amount}
               prefix="$"
-              step="0.01"
+              step={0.01}
               autoComplete="off"
               helpText="The base subscription amount before discount"
             />
@@ -380,38 +380,43 @@ function EditSubscription() {
           </FormLayout>
         </Card>
 
-        <Card sectioned title="Discount Preview">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Discount Preview</Text>
+          </Box>
+          <Box padding="400">
           <LegacyStack distribution="fillEvenly">
             <LegacyStack vertical alignment="center">
               <Text variant="headingLg" as="h3">
                 ${formData.base_amount || '0.00'}
               </Text>
-              <Text variant="bodySm" color="subdued">
+              <Text variant="bodySm" as="p" tone="subdued">
                 Base Amount
               </Text>
             </LegacyStack>
             
             <LegacyStack vertical alignment="center">
-              <Text variant="headingLg" as="h3" color="critical">
+              <Text variant="headingLg" as="h3" tone="critical">
                 -${calculatedDiscount}
               </Text>
-              <Text variant="bodySm" color="subdued">
+              <Text variant="bodySm" as="p" tone="subdued">
                 Discount ({formData.discount_percentage || '0'}%)
               </Text>
             </LegacyStack>
             
             <LegacyStack vertical alignment="center">
-              <Text variant="headingLg" as="h3" color="success">
+              <Text variant="headingLg" as="h3" tone="success">
                 ${formData.base_amount && formData.discount_percentage 
                   ? new Decimal(formData.base_amount).minus(calculatedDiscount).toFixed(2)
                   : '0.00'
                 }
               </Text>
-              <Text variant="bodySm" color="subdued">
+              <Text variant="bodySm" as="p" tone="subdued">
                 Final Amount
               </Text>
             </LegacyStack>
           </LegacyStack>
+          </Box>
         </Card>
 
         <Card>
@@ -424,16 +429,16 @@ function EditSubscription() {
               <Text variant="headingLg" as="h3">
                 {subscription?.usage_count || 0}
               </Text>
-              <Text variant="bodySm" color="subdued">
+              <Text variant="bodySm" as="p" tone="subdued">
                 Times Used
               </Text>
             </LegacyStack>
             
             <LegacyStack vertical alignment="center">
-              <Text variant="headingLg" as="h3" color="success">
+              <Text variant="headingLg" as="h3" tone="success">
                 ${subscription?.total_savings.toFixed(2) || '0.00'}
               </Text>
-              <Text variant="bodySm" color="subdued">
+              <Text variant="bodySm" as="p" tone="subdued">
                 Total Savings
               </Text>
             </LegacyStack>

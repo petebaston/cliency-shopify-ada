@@ -101,7 +101,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                 Welcome to Discount Manager Pro!
               </Text>
               <Box paddingBlockStart="400">
-                <Text variant="bodyLg" as="p" color="subdued">
+                <Text variant="bodyLg" as="p" tone="subdued">
                   Let's get your discount strategy up and running in just 3 minutes
                 </Text>
               </Box>
@@ -117,25 +117,25 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                     <List type="bullet">
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={StarFilledIcon} color="warning" />
+                          <Icon source={StarFilledIcon} tone="warning" />
                           <Text as="span">Personalized discount recommendations based on your store data</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={StarFilledIcon} color="warning" />
+                          <Icon source={StarFilledIcon} tone="warning" />
                           <Text as="span">Automated discount campaigns that boost sales</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={StarFilledIcon} color="warning" />
+                          <Icon source={StarFilledIcon} tone="warning" />
                           <Text as="span">Real-time analytics to track your success</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={StarFilledIcon} color="warning" />
+                          <Icon source={StarFilledIcon} tone="warning" />
                           <Text as="span">24/7 support and regular feature updates</Text>
                         </LegacyStack>
                       </List.Item>
@@ -146,7 +146,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
             </Box>
 
             <Box paddingBlockStart="400">
-              <Banner status="info" icon={LightbulbIcon}>
+              <Banner tone="info" icon={LightbulbIcon}>
                 <Text as="p" fontWeight="semibold">
                   Pro Tip: Stores using our app see an average 23% increase in conversion rates!
                 </Text>
@@ -162,7 +162,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
               What's your primary business goal?
             </Text>
             <Box paddingBlockStart="400">
-              <Text variant="bodyMd" as="p" color="subdued">
+              <Text variant="bodyMd" as="p" tone="subdued">
                 We'll customize your discount strategy to help you achieve it
               </Text>
             </Box>
@@ -190,12 +190,12 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                           <Text variant="headingMd" as="h3">
                             {goal.label}
                           </Text>
-                          <Text variant="bodySm" as="p" color="subdued">
+                          <Text variant="bodySm" as="p" tone="subdued">
                             {goal.description}
                           </Text>
                         </LegacyStack.Item>
                         {wizardData.businessGoal === goal.value && (
-                          <Icon source={CheckCircleIcon} color="success" />
+                          <Icon source={CheckCircleIcon} tone="success" />
                         )}
                       </LegacyStack>
                     </div>
@@ -213,7 +213,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
               Tell us about your store
             </Text>
             <Box paddingBlockStart="400">
-              <Text variant="bodyMd" as="p" color="subdued">
+              <Text variant="bodyMd" as="p" tone="subdued">
                 This helps us create the perfect discount strategy for you
               </Text>
             </Box>
@@ -256,7 +256,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
             </Box>
 
             <Box paddingBlockStart="600">
-              <Banner status="success">
+              <Banner tone="success">
                 <Text as="p">
                   Based on your inputs, we estimate you could save customers <strong>${((parseFloat(wizardData.averageOrderValue) || 50) * 0.15).toFixed(2)}</strong> per order with optimized discounts!
                 </Text>
@@ -272,7 +272,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
               Choose your discount strategy
             </Text>
             <Box paddingBlockStart="400">
-              <Text variant="bodyMd" as="p" color="subdued">
+              <Text variant="bodyMd" as="p" tone="subdued">
                 We'll automatically create these discounts for you
               </Text>
             </Box>
@@ -322,16 +322,16 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                                 {strategy.label}
                               </Text>
                               {strategy.recommended && (
-                                <Badge status="success">Recommended</Badge>
+                                <Badge tone="success">Recommended</Badge>
                               )}
                             </LegacyStack>
-                            <Text variant="bodySm" as="p" color="subdued">
+                            <Text variant="bodySm" as="p" tone="subdued">
                               {strategy.description}
                             </Text>
                           </LegacyStack>
                         </LegacyStack.Item>
                         {wizardData.discountStrategy === strategy.value && (
-                          <Icon source={CheckCircleIcon} color="success" />
+                          <Icon source={CheckCircleIcon} tone="success" />
                         )}
                       </LegacyStack>
                     </div>
@@ -349,7 +349,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
               Quick setup preferences
             </Text>
             <Box paddingBlockStart="400">
-              <Text variant="bodyMd" as="p" color="subdued">
+              <Text variant="bodyMd" as="p" tone="subdued">
                 Almost done! Just a few more preferences
               </Text>
             </Box>
@@ -386,7 +386,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
             </Box>
 
             <Box paddingBlockStart="400">
-              <Banner status="info" icon={PlayCircleIcon}>
+              <Banner tone="info" icon={PlayCircleIcon}>
                 <Text as="p">
                   <strong>Watch our 2-minute tutorial</strong> to see how successful merchants use our app
                 </Text>
@@ -409,7 +409,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                 You're all set!
               </Text>
               <Box paddingBlockStart="400">
-                <Text variant="bodyLg" as="p" color="subdued">
+                <Text variant="bodyLg" as="p" tone="subdued">
                   Your discount strategy is now active
                 </Text>
               </Box>
@@ -425,25 +425,25 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
                     <List>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={CheckCircleIcon} color="success" />
+                          <Icon source={CheckCircleIcon} tone="success" />
                           <Text as="span">3 active discount campaigns tailored to your goals</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={CheckCircleIcon} color="success" />
+                          <Icon source={CheckCircleIcon} tone="success" />
                           <Text as="span">Automated subscription discounts for loyal customers</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={CheckCircleIcon} color="success" />
+                          <Icon source={CheckCircleIcon} tone="success" />
                           <Text as="span">Smart analytics tracking your performance</Text>
                         </LegacyStack>
                       </List.Item>
                       <List.Item>
                         <LegacyStack spacing="tight">
-                          <Icon source={CheckCircleIcon} color="success" />
+                          <Icon source={CheckCircleIcon} tone="success" />
                           <Text as="span">Weekly optimization recommendations</Text>
                         </LegacyStack>
                       </List.Item>
@@ -454,7 +454,7 @@ function OnboardingWizard({ active, onClose, onComplete }: OnboardingWizardProps
             </Box>
 
             <Box paddingBlockStart="600">
-              <Banner status="success" title="Pro tip">
+              <Banner tone="success" title="Pro tip">
                 <Text as="p">
                   Check your dashboard daily for the first week to see how customers respond to your new discounts!
                 </Text>
