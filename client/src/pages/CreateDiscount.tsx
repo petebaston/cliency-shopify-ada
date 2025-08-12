@@ -16,7 +16,7 @@ import {
   Text,
   Box,
 } from '@shopify/polaris';
-import { CalendarMinor } from '@shopify/polaris-icons';
+import { CalendarIcon } from '@shopify/polaris-icons';
 import { useNavigate } from 'react-router-dom';
 import Decimal from 'decimal.js';
 import api from '../services/api';
@@ -132,7 +132,6 @@ function CreateDiscount() {
 
   return (
     <Page
-      breadcrumbs={[{ content: 'Discounts', url: '/discounts' }]}
       title="Create discount"
       primaryAction={{
         content: 'Save discount',
@@ -147,19 +146,23 @@ function CreateDiscount() {
       ]}
     >
       {successBanner && (
-        <Banner status="success" onDismiss={() => setSuccessBanner(false)}>
+        <Banner tone="success" onDismiss={() => setSuccessBanner(false)}>
           <p>Discount created successfully!</p>
         </Banner>
       )}
 
       {errors.submit && (
-        <Banner status="critical" onDismiss={() => setErrors({ ...errors, submit: undefined })}>
+        <Banner tone="critical" onDismiss={() => setErrors({ ...errors, submit: undefined })}>
           <p>{errors.submit}</p>
         </Banner>
       )}
 
       <FormLayout>
-        <Card sectioned title="Discount information">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Discount information</Text>
+          </Box>
+          <Box padding="400">
           <FormLayout>
             <TextField
               label="Discount name"
@@ -178,9 +181,14 @@ function CreateDiscount() {
               placeholder="Describe this discount for internal reference"
             />
           </FormLayout>
+          </Box>
         </Card>
 
-        <Card sectioned title="Discount value">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Discount value</Text>
+          </Box>
+          <Box padding="400">
           <FormLayout>
             <Select
               label="Discount type"
@@ -203,9 +211,14 @@ function CreateDiscount() {
               }
             />
           </FormLayout>
+          </Box>
         </Card>
 
-        <Card sectioned title="Applies to">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Applies to</Text>
+          </Box>
+          <Box padding="400">
           <Select
             label="Apply discount to"
             options={appliesToOptions}
@@ -213,9 +226,14 @@ function CreateDiscount() {
             onChange={(value) => handleInputChange('applies_to', value)}
             helpText="Choose which products or services this discount applies to"
           />
+          </Box>
         </Card>
 
-        <Card sectioned title="Minimum requirements">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Minimum requirements</Text>
+          </Box>
+          <Box padding="400">
           <LegacyStack vertical>
             <RadioButton
               label="No minimum requirements"
@@ -263,9 +281,14 @@ function CreateDiscount() {
               </Box>
             )}
           </LegacyStack>
+          </Box>
         </Card>
 
-        <Card sectioned title="Usage limits">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Usage limits</Text>
+          </Box>
+          <Box padding="400">
           <FormLayout>
             <TextField
               label="Total usage limit (optional)"
@@ -277,9 +300,14 @@ function CreateDiscount() {
               placeholder="e.g., 100"
             />
           </FormLayout>
+          </Box>
         </Card>
 
-        <Card sectioned title="Active dates">
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Active dates</Text>
+          </Box>
+          <Box padding="400">
           <FormLayout>
             <LegacyStack distribution="fill">
               <Popover
@@ -288,7 +316,7 @@ function CreateDiscount() {
                   <TextField
                     label="Start date"
                     value={formData.starts_at?.toLocaleDateString() || ''}
-                    prefix={<Icon source={CalendarMinor} />}
+                    prefix={<Icon source={CalendarIcon} />}
                     onFocus={() => setDatePickerActive('start')}
                     autoComplete="off"
                   />
@@ -312,7 +340,7 @@ function CreateDiscount() {
                   <TextField
                     label="End date (optional)"
                     value={formData.ends_at?.toLocaleDateString() || ''}
-                    prefix={<Icon source={CalendarMinor} />}
+                    prefix={<Icon source={CalendarIcon} />}
                     onFocus={() => setDatePickerActive('end')}
                     autoComplete="off"
                     placeholder="No end date"
@@ -333,14 +361,17 @@ function CreateDiscount() {
               </Popover>
             </LegacyStack>
           </FormLayout>
+          </Box>
         </Card>
 
-        <Card sectioned>
+        <Card>
+          <Box padding="400">
           <Checkbox
             label="Activate discount immediately"
             checked={formData.is_active}
             onChange={(value) => handleInputChange('is_active', value)}
           />
+          </Box>
         </Card>
       </FormLayout>
     </Page>

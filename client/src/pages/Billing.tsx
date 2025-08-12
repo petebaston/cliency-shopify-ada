@@ -76,7 +76,7 @@ function Billing() {
       name: 'Starter',
       price: 29,
       interval: 'month',
-      icon: RocketMajor,
+      icon: RocketIcon,
       color: '#00A8E8',
       features: [
         { text: 'Up to 10 active discounts', included: true },
@@ -102,7 +102,7 @@ function Billing() {
       price: 79,
       interval: 'month',
       popular: true,
-      icon: TrophyMajor,
+      icon: TrophyIcon,
       color: '#50B83C',
       features: [
         { text: 'Unlimited active discounts', included: true },
@@ -209,7 +209,7 @@ function Billing() {
 
   const handleCancelSubscription = async () => {
     try {
-      await api.post('/billing/cancel');
+      await api.post('/billing/cancel', {});
       fetchBillingStatus();
     } catch (error) {
       console.error('Error cancelling subscription:', error);
@@ -228,13 +228,15 @@ function Billing() {
   if (loading) {
     return (
       <Page title="Billing & Plans">
-        <Card sectioned>
+        <Card>
+          <Box padding="400">
           <LegacyStack vertical>
             <Text variant="headingMd" as="h3">
               Loading billing information...
             </Text>
             <ProgressBar progress={75} size="small" />
           </LegacyStack>
+          </Box>
         </Card>
       </Page>
     );
@@ -244,14 +246,13 @@ function Billing() {
     <Page
       title="Billing & Plans"
       subtitle="Choose the perfect plan for your business"
-      breadcrumbs={[{ content: 'Settings', url: '/settings' }]}
     >
       {/* Trial Banner */}
       {trialDaysRemaining !== null && trialDaysRemaining > 0 && (
         <Box paddingBlockEnd="400">
           <Banner
             title={`Free trial: ${trialDaysRemaining} days remaining`}
-            status="info"
+            tone="info"
             action={{ content: 'Upgrade Now', onAction: () => handlePlanSelection(plans[1]) }}
           >
             <p>
@@ -265,7 +266,7 @@ function Billing() {
       {currentPlan && (
         <Box paddingBlockEnd="600">
           <Card>
-            <Box padding="400" background="bg-subdued">
+            <Box padding="400" background="bg-surface-secondary">
               <LegacyStack alignment="center" distribution="equalSpacing">
                 <LegacyStack alignment="center" spacing="tight">
                   <div style={{
@@ -277,18 +278,18 @@ function Billing() {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                    <Icon source={CashDollarIcon} color="base" />
+                    <Icon source={CashDollarIcon} tone="base" />
                   </div>
                   <LegacyStack vertical spacing="extraTight">
                     <Text variant="headingMd" as="h3">
                       Current Plan
                     </Text>
                     <LegacyStack spacing="tight">
-                      <Badge status="success" size="medium">
+                      <Badge tone="success" size="medium">
                         {plans.find(p => p.id === currentPlan)?.name || currentPlan}
                       </Badge>
                       {trialDaysRemaining !== null && trialDaysRemaining > 0 && (
-                        <Badge status="info">Trial</Badge>
+                        <Badge tone="info">Trial</Badge>
                       )}
                     </LegacyStack>
                   </LegacyStack>
@@ -296,11 +297,11 @@ function Billing() {
                 
                 <ButtonGroup>
                   {currentPlan !== 'pro' && (
-                    <Button primary onClick={() => handlePlanSelection(plans[2])}>
+                    <Button variant="primary" onClick={() => handlePlanSelection(plans[2])}>
                       Upgrade Plan
                     </Button>
                   )}
-                  <Button plain destructive onClick={handleCancelSubscription}>
+                  <Button variant="plain" tone="critical" onClick={handleCancelSubscription}>
                     Cancel Subscription
                   </Button>
                 </ButtonGroup>
@@ -313,11 +314,11 @@ function Billing() {
       {/* ROI Calculator Banner */}
       <Box paddingBlockEnd="600">
         <Card>
-          <Box padding="400" background="bg-success-subdued">
+          <Box padding="400" background="bg-surface-success">
             <LegacyStack alignment="center" distribution="equalSpacing">
               <LegacyStack vertical spacing="tight">
                 <LegacyStack alignment="center" spacing="tight">
-                  <Icon source={ChartLineIcon} color="success" />
+                  <Icon source={ChartLineIcon} tone="success" />
                   <Text variant="headingMd" as="h3">
                     Average ROI with our app
                   </Text>
@@ -337,12 +338,12 @@ function Billing() {
       {/* Plans Grid */}
       <Grid>
         {plans.map((plan) => (
-          <Grid.Cell key={plan.id} columnSpan={{ xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }}>
+          <Grid.Cell key={plan.id} columnSpan={{ xs: 6, sm: 6, md: 4, lg: 4, xl: 4 }}>
             <Card>
               {plan.popular && (
-                <Box padding="200" background="bg-warning-subdued">
+                <Box padding="200" background="bg-surface-warning">
                   <LegacyStack alignment="center" distribution="center" spacing="tight">
-                    <Icon source={StarFilledIcon} color="warning" />
+                    <Icon source={StarFilledIcon} tone="warning" />
                     <Text variant="bodySm" as="p" fontWeight="bold">
                       MOST POPULAR
                     </Text>
@@ -362,7 +363,7 @@ function Billing() {
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
-                      <Icon source={plan.icon} color="base" />
+                      <Icon source={plan.icon} tone="base" />
                     </div>
                   </LegacyStack>
                   
@@ -374,7 +375,7 @@ function Billing() {
                       <Text variant="heading3xl" as="p" fontWeight="bold">
                         ${plan.price}
                       </Text>
-                      <Text variant="bodyMd" as="p" color="subdued">
+                      <Text variant="bodyMd" as="p" tone="subdued">
                         per {plan.interval}
                       </Text>
                     </LegacyStack>
@@ -387,7 +388,7 @@ function Billing() {
                       <List.Item key={index}>
                         <LegacyStack spacing="tight">
                           <Icon
-                            source={feature.included ? CheckCircleIcon : CircleDisableMinor}
+                            source={feature.included ? CheckCircleIcon : XCircleIcon}
                             color={feature.included ? 'success' : 'subdued'}
                           />
                           <Text
@@ -405,7 +406,7 @@ function Billing() {
                   <Box paddingBlockStart="400">
                     <Button
                       fullWidth
-                      primary={plan.popular}
+                      variant={plan.popular ? "primary" : "basic"}
                       onClick={() => handlePlanSelection(plan)}
                       disabled={currentPlan === plan.id}
                     >
@@ -421,15 +422,19 @@ function Billing() {
 
       {/* Features Comparison */}
       <Box paddingBlockStart="800">
-        <Card title="Why merchants love our app" sectioned>
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Why merchants love our app</Text>
+          </Box>
+          <Box padding="400">
           <Grid>
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={HeartMajor} color="critical" />
+                <Icon source={HeartIcon} tone="critical" />
                 <Text variant="headingSm" as="h4">
                   Save Time
                 </Text>
-                <Text variant="bodySm" as="p" color="subdued" alignment="center">
+                <Text variant="bodySm" as="p" tone="subdued" alignment="center">
                   Automate discount management and save 10+ hours per week
                 </Text>
               </LegacyStack>
@@ -437,11 +442,11 @@ function Billing() {
             
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={ChartLineIcon} color="success" />
+                <Icon source={ChartLineIcon} tone="success" />
                 <Text variant="headingSm" as="h4">
                   Increase Sales
                 </Text>
-                <Text variant="bodySm" as="p" color="subdued" alignment="center">
+                <Text variant="bodySm" as="p" tone="subdued" alignment="center">
                   Average 23% increase in conversion rates
                 </Text>
               </LegacyStack>
@@ -449,11 +454,11 @@ function Billing() {
             
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={PersonIcon} color="interactive" />
+                <Icon source={PersonIcon} tone="interactive" />
                 <Text variant="headingSm" as="h4">
                   Happy Customers
                 </Text>
-                <Text variant="bodySm" as="p" color="subdued" alignment="center">
+                <Text variant="bodySm" as="p" tone="subdued" alignment="center">
                   Personalized discounts improve satisfaction
                 </Text>
               </LegacyStack>
@@ -461,28 +466,33 @@ function Billing() {
             
             <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }}>
               <LegacyStack vertical spacing="tight" alignment="center">
-                <Icon source={RocketMajor} color="warning" />
+                <Icon source={RocketIcon} tone="warning" />
                 <Text variant="headingSm" as="h4">
                   Quick Setup
                 </Text>
-                <Text variant="bodySm" as="p" color="subdued" alignment="center">
+                <Text variant="bodySm" as="p" tone="subdued" alignment="center">
                   Get started in under 3 minutes
                 </Text>
               </LegacyStack>
             </Grid.Cell>
           </Grid>
+          </Box>
         </Card>
       </Box>
 
       {/* FAQ Section */}
       <Box paddingBlockStart="400">
-        <Card title="Frequently Asked Questions" sectioned>
+        <Card>
+          <Box padding="400">
+            <Text variant="headingMd" as="h3">Frequently Asked Questions</Text>
+          </Box>
+          <Box padding="400">
           <LegacyStack vertical spacing="loose">
             <Box>
               <Text variant="headingSm" as="h4">
                 Can I change plans at any time?
               </Text>
-              <Text variant="bodyMd" as="p" color="subdued">
+              <Text variant="bodyMd" as="p" tone="subdued">
                 Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately.
               </Text>
             </Box>
@@ -491,7 +501,7 @@ function Billing() {
               <Text variant="headingSm" as="h4">
                 Is there a free trial?
               </Text>
-              <Text variant="bodyMd" as="p" color="subdued">
+              <Text variant="bodyMd" as="p" tone="subdued">
                 Yes, all plans come with a 14-day free trial. No credit card required to start.
               </Text>
             </Box>
@@ -500,11 +510,12 @@ function Billing() {
               <Text variant="headingSm" as="h4">
                 What happens to my data if I cancel?
               </Text>
-              <Text variant="bodyMd" as="p" color="subdued">
+              <Text variant="bodyMd" as="p" tone="subdued">
                 Your data is retained for 30 days after cancellation. You can export it at any time.
               </Text>
             </Box>
           </LegacyStack>
+          </Box>
         </Card>
       </Box>
 
@@ -532,7 +543,7 @@ function Billing() {
               for <strong>${selectedPlan?.price}/month</strong>.
             </p>
             {trialDaysRemaining !== null && trialDaysRemaining > 0 && (
-              <Banner status="info">
+              <Banner tone="info">
                 Your free trial will continue until it expires. You'll be charged after the trial ends.
               </Banner>
             )}

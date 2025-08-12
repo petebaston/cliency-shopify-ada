@@ -81,7 +81,7 @@ function Dashboard() {
 
   const activityRows = recentActivity.map((item) => [
     item.name,
-    <Badge status={item.is_active ? 'success' : 'neutral'}>
+    <Badge tone={item.is_active ? 'success' : 'base'}>
       {item.is_active ? 'Active' : 'Inactive'}
     </Badge>,
     item.discount_type,
@@ -107,15 +107,15 @@ function Dashboard() {
         {statsCards.map((stat, index) => (
           <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 3, xl: 3 }} key={index}>
             <Card>
-              <Box paddingBlockStart="400" paddingBlockEnd="400">
+              <Box padding="400">
                 <LegacyStack vertical spacing="tight">
-                  <Text variant="bodyMd" as="p" color="subdued">
+                  <Text variant="bodyMd" as="p" tone="subdued">
                     {stat.title}
                   </Text>
                   <Text variant="heading2xl" as="h2">
                     {stat.value}
                   </Text>
-                  <Badge status={stat.trend === 'positive' ? 'success' : 'neutral'}>
+                  <Badge tone={stat.trend === 'positive' ? 'success' : 'base'}>
                     {stat.change}
                   </Badge>
                 </LegacyStack>
@@ -127,14 +127,14 @@ function Dashboard() {
 
       <Box paddingBlockStart="400">
         <Card>
-          <Box paddingBlockEnd="400">
+          <Box padding="400">
             <LegacyStack distribution="equalSpacing" alignment="center">
               <Text variant="headingMd" as="h3">
                 Recent Discount Activity
               </Text>
               <ButtonGroup>
                 <Button onClick={() => navigate('/discounts')}>View All</Button>
-                <Button primary onClick={() => navigate('/discounts/new')}>
+                <Button variant="primary" onClick={() => navigate('/discounts/new')}>
                   Create New
                 </Button>
               </ButtonGroup>
@@ -153,11 +153,12 @@ function Dashboard() {
         <Grid>
           <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6, xl: 6 }}>
             <Card>
-              <Box paddingBlockEnd="400">
+              <Box padding="400">
                 <Text variant="headingMd" as="h3">
                   Quick Actions
                 </Text>
               </Box>
+              <Box padding="400">
               <LegacyStack vertical spacing="tight">
                 <Button fullWidth onClick={() => navigate('/discounts/new')}>
                   Create New Discount
@@ -169,21 +170,23 @@ function Dashboard() {
                   View Analytics
                 </Button>
               </LegacyStack>
+              </Box>
             </Card>
           </Grid.Cell>
           <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6, xl: 6 }}>
             <Card>
-              <Box paddingBlockEnd="400">
+              <Box padding="400">
                 <Text variant="headingMd" as="h3">
                   Performance Overview
                 </Text>
               </Box>
+              <Box padding="400">
               <LegacyStack vertical spacing="tight">
                 <LegacyStack distribution="equalSpacing">
                   <Text variant="bodyMd" as="p">
                     Discount Redemption Rate
                   </Text>
-                  <Badge status="success">68%</Badge>
+                  <Badge tone="success">68%</Badge>
                 </LegacyStack>
                 <LegacyStack distribution="equalSpacing">
                   <Text variant="bodyMd" as="p">
@@ -197,9 +200,10 @@ function Dashboard() {
                   <Text variant="bodyMd" as="p">
                     Customer Retention
                   </Text>
-                  <Badge status="success">+15%</Badge>
+                  <Badge tone="success">+15%</Badge>
                 </LegacyStack>
               </LegacyStack>
+              </Box>
             </Card>
           </Grid.Cell>
         </Grid>
